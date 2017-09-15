@@ -5,16 +5,16 @@ import { HttpModule } from '@angular/http';
 import { Observable } from 'rxjs';
 
 import { AppComponent } from './app.component';
-import { MainNavComponent } from './main-nav/main-nav.component';
+import { CoreModule } from './core/core.module';
 import { TeamsModule } from './teams/teams.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    MainNavComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
+    CoreModule,
     HttpClientModule,
     HttpModule,
     TeamsModule

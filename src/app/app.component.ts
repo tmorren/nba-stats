@@ -20,21 +20,8 @@ export class AppComponent {
   data;
 
   constructor(private http: Http){
-    //this.getTeamStandings();
+    
   }
-
-  // getData(){
-  //   let username: string = 'tmorren';
-  //   let password: string = '80GFTJ3iOo7s';
-  //   let headers: Headers = new Headers();
-  //   headers.append("Authorization", "Basic " + btoa(username + ":" + password)); 
-
-  //   this.http.get(this.apiURL, {headers: headers})
-  //                   .map((res: Response) => res.json())
-  //                   .subscribe(res => this.data = res, err => console.log('Failed'), () => console.log(this.data));
-  // }
-
-  
  
 }
 
