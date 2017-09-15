@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 
 import { AppComponent } from './app.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
+import { TeamsModule } from './teams/teams.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { MainNavComponent } from './main-nav/main-nav.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    TeamsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

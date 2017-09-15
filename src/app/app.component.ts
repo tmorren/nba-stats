@@ -15,14 +15,12 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class AppComponent {
+  teams = [];
   title = 'app';
   data;
-  private apiURL = 'https://api.mysportsfeeds.com/v1.1/pull/nba/2016-2017-regular/overall_team_standings.json';
-  
-  //?username=tmorren&password=80GFTJ3iOo7s
 
   constructor(private http: Http){
-    //this.getData();
+    //this.getTeamStandings();
   }
 
   // getData(){
@@ -35,6 +33,8 @@ export class AppComponent {
   //                   .map((res: Response) => res.json())
   //                   .subscribe(res => this.data = res, err => console.log('Failed'), () => console.log(this.data));
   // }
+
+  
  
 }
 
