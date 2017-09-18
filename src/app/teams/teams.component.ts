@@ -18,9 +18,8 @@ export class TeamsComponent implements OnInit {
   }
 
   getTeams(){
-    this.teamsService.getTeamStandings().subscribe( (res) => {
-      this.teams = res.overallteamstandings.teamstandingsentry;
-      console.log(this.teams);
+    this.teamsService.getTeamStandings().subscribe( (data) => {
+      this.teams = data.overallteamstandings.teamstandingsentry;
     });
   }
 
