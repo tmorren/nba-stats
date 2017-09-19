@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { TeamsModule } from './teams/teams.module';
+import { GamesModule } from './games/games.module';
+import { PlayersModule } from './players/players.module';
 
 import { AuthInterceptor } from './shared/auth-interceptor';
 
@@ -20,7 +22,9 @@ import { AuthInterceptor } from './shared/auth-interceptor';
     CoreModule,
     HttpClientModule,
     HttpModule,
-    TeamsModule
+    TeamsModule,
+    GamesModule,
+    PlayersModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
