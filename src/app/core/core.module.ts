@@ -1,16 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MainNavComponent } from './main-nav/main-nav.component'
+import { RouterModule } from '@angular/router';
+import { MainNavComponent } from './main-nav/main-nav.component';
+import { HomePageComponent } from './home-page/home-page.component'
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports: [
-    MainNavComponent
+    MainNavComponent,
+    HomePageComponent
   ],
   declarations: [
-    MainNavComponent
+    MainNavComponent,
+    HomePageComponent
   ]
 })
 export class CoreModule { }

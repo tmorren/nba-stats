@@ -2,10 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { Observable } from 'rxjs';
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { TeamsModule } from './teams/teams.module';
 import { GamesModule } from './games/games.module';
@@ -24,7 +26,9 @@ import { AuthInterceptor } from './shared/auth-interceptor';
     HttpModule,
     TeamsModule,
     GamesModule,
-    PlayersModule
+    PlayersModule,
+    AppRoutingModule
+   
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
