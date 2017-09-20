@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-players',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlayersComponent implements OnInit {
 
-  constructor() { }
+  private playerIdSub: any;
+  playerId: number;
+
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.playerIdSub = this.route.params.subscribe(params => {
+      this.playerId = +params['id']; // (+) converts string 'id' to a number
+
+      // In a real app: dispatch action to load the details here.
+    });
   }
 
 }

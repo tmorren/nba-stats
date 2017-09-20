@@ -9,12 +9,16 @@ import { TeamListComponent } from './team-list/team-list.component';
     RouterModule.forChild([
         {
             path: 'teams',
-            component: TeamListComponent,
+            component: TeamsComponent,
             children: [
+                {
+                    path: '',
+                    component: TeamListComponent
+                },
                 {
                     path: ':id',
                     component: TeamComponent
-                },
+                }
             ]
         }
     ])
