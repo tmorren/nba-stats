@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { TeamsService } from '../teams.service';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -10,25 +11,33 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class TeamComponent implements OnInit {
 
-  selectedTeamId: number;
+  selectedTeam: string;
   subscription: Subscription[] = [];
   stream: Subscription;
   watchForIdChange: Subscription;
+  teamInfo;
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,) { }
+    private router: Router,
+    private teamsService: TeamsService) { }
 
   ngOnInit() {
     this.watchForIdChange = this.route.params.subscribe(params => {
       
-      this.selectedTeamId = params['id'];
+      this.selectedTeam = params['abbreviation'];
       if(this.stream) {
         this.stream.unsubscribe();
       }
 
-      //console.log(this.selectedTeamId);
+      this.getTeamInfo(this.selectedTeam);
     });
-}
+  }
+
+  getTeamInfo(team){
+    this.teamsService.getTeamInfo(team).subscribe( (data) => {
+      console.log(data);
+    });
+  }
 
 }

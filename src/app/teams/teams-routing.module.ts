@@ -16,7 +16,7 @@ import { TeamListComponent } from './team-list/team-list.component';
                     component: TeamListComponent
                 },
                 {
-                    path: ':id',
+                    path: ':abbreviation',
                     component: TeamComponent
                 }
             ]

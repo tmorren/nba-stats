@@ -14,7 +14,9 @@ export class TeamListComponent implements OnInit {
   constructor(private teamsService: TeamsService) { }
 
   ngOnInit() {
-    this.getTeams();
+    if(this.teams.length == 0){
+      this.getTeams();
+    }
   }
 
   getTeams(){

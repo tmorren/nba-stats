@@ -1,7 +1,7 @@
 <div *ngFor="let team of teams">
     <div class="card">
       <div class="card-block">
-        <a [routerLink]="[team.team.ID]">{{ team.team.City }} {{ team.team.Name }}</a>
+        <a [routerLink]="[team.team.Abbreviation]">{{ team.team.City }} {{ team.team.Name }}</a>
       </div>
     </div>
 </div>
