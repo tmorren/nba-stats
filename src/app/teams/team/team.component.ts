@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TeamsService } from '../teams.service';
-
 import { Subscription } from 'rxjs/Subscription';
+
+import { Team } from '../../shared/classes/team';
 
 @Component({
   selector: 'app-team',
@@ -14,8 +15,8 @@ export class TeamComponent implements OnInit {
   selectedTeam: string;
   subscription: Subscription[] = [];
   stream: Subscription;
+  team: Team;
   watchForIdChange: Subscription;
-  teamInfo;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,6 +38,14 @@ export class TeamComponent implements OnInit {
   getTeamInfo(team){
     this.teamsService.getTeamInfo(team).subscribe( (data) => {
       console.log(data);
+      let teamInfo = data.overallteamstandings.teamstandingsentry[0].team;
+      let teamStats = data.overallteamstandings.teamstandingsentry[0].stats;
+
+      team = new Team;
+      this.team = Object.assign(team, teamInfo);
+      this.team = Object.assign(team, teamStats);
+      console.log(this.team);
+      console.log(this.team.Ast);
     });
   }
 
