@@ -4,6 +4,7 @@ import { TeamsService } from '../teams.service';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Team } from '../../shared/classes/team';
+import { Player } from '../../shared/classes/player';
 
 @Component({
   selector: 'app-team',
@@ -12,6 +13,7 @@ import { Team } from '../../shared/classes/team';
 })
 export class TeamComponent implements OnInit {
 
+  players: Player[] = [];
   selectedTeam: string;
   subscription: Subscription[] = [];
   stream: Subscription;
@@ -32,6 +34,7 @@ export class TeamComponent implements OnInit {
       }
 
       this.getTeamInfo(this.selectedTeam);
+      this.getTeamPlayers(this.selectedTeam);
     });
   }
 
@@ -45,7 +48,22 @@ export class TeamComponent implements OnInit {
       this.team = Object.assign(team, teamInfo);
       this.team = Object.assign(team, teamStats);
       console.log(this.team);
-      console.log(this.team.Ast);
+    });
+  }
+
+  getTeamPlayers(team){
+    this.teamsService.getTeamPlayers(team).subscribe( (data) => {
+      for(var i = 0; i < data.cumulativeplayerstats.playerstatsentry.length; i++){
+        let playerInfo = data.cumulativeplayerstats.playerstatsentry[i].player;
+        let playerStats = data.cumulativeplayerstats.playerstatsentry[i].stats;
+        let player = new Player;
+
+        player = Object.assign(player, playerInfo);
+        player = Object.assign(player, playerStats);
+        this.players.push(player);
+      }
+      
+      console.log(this.players);
     });
   }
 

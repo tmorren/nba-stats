@@ -22,7 +22,16 @@ export class TeamsService {
   }
 
   getTeamInfo(team){
-    let requestUrl = environment.baseUrl + "/2016-2017-regular/overall_team_standings.json?team=" + team;
+    let requestUrl = environment.baseUrl + "/2016-2017-regular/overall_team_standings.json?teamstats=W&team=" + team;
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json; charset=utf-8');
+
+    return this.http.get(requestUrl, {headers: headers}).map((res: any) => res);
+  }
+
+  getTeamPlayers(team){
+    let statsRequested = "REB/G";
+    let requestUrl = environment.baseUrl + "/2016-2017-regular/cumulative_player_stats.json?team=" + team + "&playerstats=" + statsRequested;
     const headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json; charset=utf-8');
 
