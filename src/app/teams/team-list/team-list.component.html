@@ -1,8 +1,3 @@
-
-<p-dataTable [value]="teams">
-  <p-column field="team.City" header="Team"></p-column>
-</p-dataTable>
-
 <div *ngFor="let team of teams">
     <div class="card">
       <div class="card-block">
@@ -10,3 +5,7 @@
       </div>
     </div>
 </div>
+
+<p-dataTable [value]="teams">
+  <p-column field="team.Abbreviation" header="Team"></p-column>
+</p-dataTable>
