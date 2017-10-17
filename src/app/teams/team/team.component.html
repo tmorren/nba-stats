@@ -7,23 +7,26 @@
 </div> -->
 
 <div *ngIf="players">
-    <p-dataTable [(value)]="players">
+    <p-dataTable 
+        [(value)]="players"
+        [responsive]="true"
+    >
       <p-column header="Player">
-          <ng-template let-player="rowData" pTemplate="body">
-              {{ player.FirstName }} {{player.LastName}}
-          </ng-template>
-      </p-column>
-      <p-column header="Pts/G">
         <ng-template let-player="rowData" pTemplate="body">
-            {{ player.PtsPerGame['#text'] }}
+            {{ player.FirstName }} {{player.LastName}}
         </ng-template>
       </p-column>
-      <p-column header="Ast/G">
+      <p-column header="Pts/G" [sortable]="true" >
+        <ng-template let-player="rowData" pTemplate="body" let-sort="sortFn">
+           {{ player.PtsPerGame['#text'] }}
+        </ng-template>
+      </p-column>
+      <p-column header="Ast/G" [sortable]="true">
         <ng-template let-player="rowData" pTemplate="body">
             {{ player.AstPerGame['#text'] }}
         </ng-template>
       </p-column>
-      <p-column header="Reb/G">
+      <p-column header="Reb/G" [sortable]="true">
         <ng-template let-player="rowData" pTemplate="body">
             {{ player.RebPerGame['#text'] }}
         </ng-template>

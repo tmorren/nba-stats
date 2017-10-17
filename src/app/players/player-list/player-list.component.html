@@ -1,3 +1,14 @@
-<p>
-  player-list works!
-</p>
+<div *ngIf="players">
+  <p-dataTable 
+      [(value)]="players"
+      [responsive]="true"
+      [rows]="10" 
+      [paginator]="true"
+  >
+    <p-column header="Player">
+      <ng-template let-player="rowData" pTemplate="body">
+        <a [routerLink]="[player.ID]">{{ player.FirstName }} {{player.LastName}}</a>
+      </ng-template>
+    </p-column>
+  </p-dataTable>
+</div>
