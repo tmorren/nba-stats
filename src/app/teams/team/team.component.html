@@ -11,22 +11,22 @@
         [(value)]="players"
         [responsive]="true"
     >
-      <p-column header="Player">
+      <p-column header="Player" >
         <ng-template let-player="rowData" pTemplate="body">
             {{ player.FirstName }} {{player.LastName}}
         </ng-template>
       </p-column>
-      <p-column header="Pts/G" [sortable]="true" >
-        <ng-template let-player="rowData" pTemplate="body" let-sort="sortFn">
+      <p-column header="Pts/G" sortable="custom" (sortFunction)="sortPlayers(players, 'PtsPerGame')">
+        <ng-template let-player="rowData" pTemplate="body"  let-sort="sortFn">
            {{ player.PtsPerGame['#text'] }}
         </ng-template>
       </p-column>
-      <p-column header="Ast/G" [sortable]="true">
+      <p-column header="Ast/G" sortable="custom" (sortFunction)="sortPlayers(players, 'AstPerGame')">
         <ng-template let-player="rowData" pTemplate="body">
             {{ player.AstPerGame['#text'] }}
         </ng-template>
       </p-column>
-      <p-column header="Reb/G" [sortable]="true">
+      <p-column header="Reb/G" sortable="custom" (sortFunction)="sortPlayers(players, 'RebPerGame')">
         <ng-template let-player="rowData" pTemplate="body">
             {{ player.RebPerGame['#text'] }}
         </ng-template>

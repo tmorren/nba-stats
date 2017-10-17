@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TeamsService } from '../teams.service';
 import { Subscription } from 'rxjs/Subscription';
 
+import { Functions } from '../../shared/functions';
 import { Team } from '../../shared/classes/team';
 import { Player } from '../../shared/classes/player';
 
@@ -63,9 +64,11 @@ export class TeamComponent implements OnInit {
         this.players.push(player);
         console.log(player.FirstName);
       }
-      
-      console.log(this.players);
     });
+  }
+
+  sortPlayers(players, sortBy){
+    this.players = Functions.sort(players, sortBy);
   }
 
 }

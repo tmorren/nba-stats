@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlayersService } from '../players.service';
 import { Subscription } from 'rxjs/Subscription';
 
+import { Functions } from '../../shared/functions';
 import { Team } from '../../shared/classes/team';
 import { Player } from '../../shared/classes/player';
 
@@ -37,5 +38,8 @@ export class PlayerListComponent implements OnInit {
       
       console.log(this.players);
     });
+  }
+
+  sortPlayers(players, sortBy){
   }
 }
