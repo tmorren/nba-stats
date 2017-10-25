@@ -41,14 +41,12 @@ export class TeamComponent implements OnInit {
 
   getTeamInfo(team){
     this.teamsService.getTeamInfo(team).subscribe( (data) => {
-      console.log(data);
       let teamInfo = data.overallteamstandings.teamstandingsentry[0].team;
       let teamStats = data.overallteamstandings.teamstandingsentry[0].stats;
 
       team = new Team;
       this.team = Object.assign(team, teamInfo);
       this.team = Object.assign(team, teamStats);
-      console.log(this.team);
     });
   }
 
@@ -62,7 +60,6 @@ export class TeamComponent implements OnInit {
         player = Object.assign(player, playerInfo);
         player = Object.assign(player, playerStats);
         this.players.push(player);
-        console.log(player.FirstName);
       }
     });
   }

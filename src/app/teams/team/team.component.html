@@ -1,11 +1,3 @@
-<!-- <div *ngFor="let player of players">
-  <div class="card">
-    <div class="card-block">
-      <a [routerLink]="[player.ID]">{{ player.FirstName }} {{ player.LastName }}</a>
-    </div>
-  </div>
-</div> -->
-
 <div *ngIf="players">
     <p-dataTable 
         [(value)]="players"
@@ -13,7 +5,7 @@
     >
       <p-column header="Player" >
         <ng-template let-player="rowData" pTemplate="body">
-            {{ player.FirstName }} {{player.LastName}}
+            <a [routerLink]="['/players', player.ID]">{{ player.FirstName }} {{player.LastName}}</a>
         </ng-template>
       </p-column>
       <p-column header="Pts/G" sortable="custom" (sortFunction)="sortPlayers(players, 'PtsPerGame')">

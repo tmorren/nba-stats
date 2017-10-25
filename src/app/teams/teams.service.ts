@@ -21,8 +21,8 @@ export class TeamsService {
     return this.http.get(this.apiURL, {headers: headers}).map((res: any) => res);
   }
 
-  getTeamInfo(team){
-    let requestUrl = environment.baseUrl + "/2016-2017-regular/overall_team_standings.json";
+  getTeamInfo(team, season = "latest"){
+    let requestUrl = environment.baseUrl + `/${season}/overall_team_standings.json`;
 
     const headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json; charset=utf-8');
@@ -34,15 +34,16 @@ export class TeamsService {
     return this.http.get(requestUrl, {headers: headers, params: params}).map((res: any) => res);
   }
 
-  getTeamPlayers(team){
-    let requestUrl = environment.baseUrl + "/2016-2017-regular/cumulative_player_stats.json";// + team + "&playerstats=" + statsRequested;
+  getTeamPlayers(team, season = "latest"){
+    let requestUrl = environment.baseUrl + `/${season}/cumulative_player_stats.json`;// + team + "&playerstats=" + statsRequested;
 
     const headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json; charset=utf-8');
 
     const params = new HttpParams()
     .set('team', String(team))
-    .set('playerstats', 'PTS/G,AST/G,REB/G');
+    .set('playerstats', 'PTS/G,AST/G,REB/G')
+    .set('sort', 'stats.PTS/G.d');
     
 
     return this.http.get(requestUrl, {headers: headers, params: params}).map((res: any) => res);
