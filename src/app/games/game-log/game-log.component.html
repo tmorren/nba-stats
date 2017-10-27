@@ -1,0 +1,36 @@
+<div *ngIf="gameLogs">
+  <p-dataTable 
+    [(value)]="gameLogs"
+    [responsive]="true"
+    [rows]="10" 
+    [paginator]="true"
+    expandableRows="true"
+  >
+    <p-column header="Date">
+      <ng-template let-gamelog="rowData" pTemplate="body">
+        {{ gamelog.game.date }}
+      </ng-template>
+    </p-column>
+    <p-column header="Points" sortable="custom" (sortFunction)="sortPlayers(players, 'PtsPerGame')">
+      <ng-template let-gamelog="rowData" pTemplate="body"  let-sort="sortFn">
+        {{ gamelog.stats.Pts['#text'] }}
+      </ng-template>
+    </p-column>
+    <p-column header="Rebounds" sortable="custom" (sortFunction)="sortPlayers(players, 'PtsPerGame')">
+      <ng-template let-gamelog="rowData" pTemplate="body"  let-sort="sortFn">
+        {{ gamelog.stats.Reb['#text'] }}
+      </ng-template>
+    </p-column>
+    <p-column header="Assists" sortable="custom" (sortFunction)="sortPlayers(players, 'PtsPerGame')">
+      <ng-template let-gamelog="rowData" pTemplate="body"  let-sort="sortFn">
+        {{ gamelog.stats.Ast['#text'] }}
+      </ng-template>
+    </p-column>
+    <p-column expander="true" styleClass="col-icon"></p-column>
+    <ng-template let-gamelog pTemplate="rowexpansion">
+      <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px">
+          {{ gamelog.stats.Ast['#text']}}
+      </div>
+    </ng-template>
+  </p-dataTable>
+</div>
