@@ -26,7 +26,7 @@ export class AuthInterceptor implements HttpInterceptor {
         let password: string = environment.apiPassword;
 
         const authReq = req.clone({headers: req.headers.set("Authorization", "Basic " + btoa(username + ":" + password))});
-        console.log("Settings auth headers");
+        
         return next.handle(authReq);
       }
 }

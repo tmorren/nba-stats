@@ -1,5 +1,12 @@
+body{
+    background: $light-gray;
+}
+
 .main-container{
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
 
+*{
+    font-family: $sans-serif;
+}

@@ -36,6 +36,8 @@ export class PlayerComponent implements OnInit {
       this.getPlayerStats(this.selectedPlayer);
       this.getPlayerInfo(this.selectedPlayer)
     });
+
+    console.log(this.player);
   }
 
   getPlayerInfo(player){

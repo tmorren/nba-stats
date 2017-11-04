@@ -1,4 +1,9 @@
-<p *ngIf="player">
+<div *ngIf="player" class="box">
+  <h1>{{ player.FirstName }} {{ player.LastName }}</h1>
   <img src="{{ player.officialImageSrc }}">
   {{ player.Age }}
-</p>
+</div>
+
+<div *ngIf="player.ID">
+  <app-game-log  [(player)]="player.ID"></app-game-log>
+</div>
