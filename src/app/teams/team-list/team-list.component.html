@@ -1,6 +1,7 @@
 <div *ngFor="let team of teams">
     <div class="card">
       <div class="card-block">
+        <img src="assets/imgs/{{team.team.Abbreviation}}.png" style="">
         <a [routerLink]="[team.team.Abbreviation]">{{ team.team.City }} {{ team.team.Name }}</a>
       </div>
     </div>
