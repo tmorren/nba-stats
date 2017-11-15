@@ -19,11 +19,12 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../node_modules/normalize.css/normalize.css",
         "../node_modules/primeng/resources/primeng.min.css",
         "./styles/styles.scss"
       ],
       "scripts": [
+        "./scripts/nav.js",
         "../node_modules/chart.js/dist/Chart.bundle.min.js",
         "../node_modules/chart.js/dist/Chart.min.js"
       ],
