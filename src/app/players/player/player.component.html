@@ -1,9 +1,41 @@
-<div *ngIf="player" class="box">
-  <h1>{{ player.FirstName }} {{ player.LastName }}</h1>
-  <img src="{{ player.officialImageSrc }}">
-  {{ player.Age }}
+<div *ngIf="player">
+
+  <div class="row box">
+    <div class="col-md-3">
+        <h1>{{ player.FirstName }} {{ player.LastName }}</h1>
+        <img src="{{ player.officialImageSrc }}">
+    </div>
+    <div class="col-md-9">
+      <div class="flex-container">
+          <p>This is a test</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+      <div class="col-md-4" style="background: red;">
+        <p>test</p>
+      </div>
+      <div class="col-md-4" style="background: red;">
+        <p>test</p>
+      </div>
+      <div class="col-md-4" style="background: red;">
+        <p>test</p>
+      </div>
+      <div class="col-md-4" style="background: red;">
+        <p>test</p>
+      </div>
+      <div class="col-md-4" style="background: red;">
+        <p>test</p>
+      </div>
+      <div class="col-md-4" style="background: red;">
+        <p>test</p>
+      </div>
+    </div>
 </div>
 
+
+
 <div *ngIf="player.ID">
-  <app-game-log  [(player)]="player.ID"></app-game-log>
+    <app-game-log  [(player)]="player.ID"></app-game-log>
 </div>
