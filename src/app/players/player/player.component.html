@@ -12,26 +12,50 @@
     </div>
   </div>
 
-  <div class="row">
-      <div class="col-md-4" style="background: red;">
-        <p>test</p>
-      </div>
-      <div class="col-md-4" style="background: red;">
-        <p>test</p>
-      </div>
-      <div class="col-md-4" style="background: red;">
-        <p>test</p>
-      </div>
-      <div class="col-md-4" style="background: red;">
-        <p>test</p>
-      </div>
-      <div class="col-md-4" style="background: red;">
-        <p>test</p>
-      </div>
-      <div class="col-md-4" style="background: red;">
-        <p>test</p>
+  <div class="card-row-3">
+    <div class="stat-card stat-card__blue">
+      <i class="fa fa-dribbble"></i>
+      <div class="stat-info">
+          <h2>{{ player.PtsPerGame['#text'] }}</h2>
+          <span>Points Per Game</span>
       </div>
     </div>
+    <div class="stat-card stat-card__red">
+      <i class="fa fa-dribbble fa-4x"></i>
+      <div class="stat-info">
+          <h2>{{ player.RebPerGame['#text'] }}</h2>
+          <span>Rebounds Per Game</span>
+      </div>
+    </div>
+    <div class="stat-card stat-card__green">
+      <i class="fa fa-dribbble"></i>
+      <div class="stat-info">
+          <h2>{{ player.AstPerGame['#text'] }}</h2>
+          <span>Assists Per Game</span>
+      </div>
+    </div>
+    <div class="stat-card stat-card__yellow">
+      <i class="fa fa-dribbble"></i>
+      <div class="stat-info">
+          <h2>{{ player.StlPerGame['#text'] }}</h2>
+          <span>Rebounds Per Game</span>
+      </div>
+    </div>
+    <div class="stat-card stat-card__red">
+      <i class="fa fa-dribbble"></i>
+      <div class="stat-info">
+          <h2>{{ player.BlkPerGame['#text'] }}</h2>
+          <span>Points Per Game</span>
+      </div>
+    </div>
+    <div class="stat-card stat-card__green">
+      <i class="fa fa-dribbble"></i>
+      <div class="stat-info">
+          <h2>{{ player.TovPerGame['#text'] }}</h2>
+          <span>Points Per Game</span>
+      </div>
+    </div>
+  </div>
 </div>
 
 

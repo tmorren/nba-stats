@@ -3,10 +3,60 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     padding: 1rem;
     //margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: .5rem;
+    margin-top: .5rem;
+    border-radius: 2px;
     box-sizing: border-box;
 
     h1{
         margin-top: 0;
+    }
+}
+
+.stat-card{
+    width: 100%;
+    border-radius: 1em;
+    color: white;
+    padding: 10px 15px 15px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    .stat-info{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: right;
+    }
+
+    *{
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    &__blue{
+        background: $blue;
+    }
+
+    &__green{
+        background: $green;
+    }
+
+    &__yellow{
+        background: #F5BE41;
+    }
+
+    &__purple{
+        background: #2541B2;
+    }
+
+    &__red{
+        background: $red;
+    }
+
+    &__orange{
+        background: #E4572E;
     }
 }

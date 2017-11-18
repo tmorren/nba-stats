@@ -28,6 +28,7 @@ export class GamesService {
     let params = new HttpParams();
 
     params = params.append('player', player);
+    params = params.append('sort', 'gamelogs.game.date.d');
 
     return this.http.get(requestUrl, {headers: headers, params: params}).map((res: any) => res);
   }

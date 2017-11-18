@@ -17,7 +17,7 @@ export class PlayerComponent implements OnInit {
   selectedPlayer: number;
   stream: Subscription;
   watchForIdChange: Subscription;
-  test;
+  //mainStats = [];
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -37,6 +37,7 @@ export class PlayerComponent implements OnInit {
       this.getPlayerInfo(this.selectedPlayer)
     });
 
+    //this.mainStats.push(this.player.PtsPerGame);
     console.log(this.player);
   }
 

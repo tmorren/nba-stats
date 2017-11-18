@@ -10,6 +10,7 @@ import { GamesService } from '../games.service';
 export class GameLogComponent implements OnInit {
 
   @Input() player: number;
+  mostRecentGame;
   gameLogs;
 
   constructor(private route: ActivatedRoute,
@@ -27,6 +28,8 @@ export class GameLogComponent implements OnInit {
     this.gamesService.getPlayerGameLog(player, season).subscribe( (data) => {
       console.log(data);
       this.gameLogs = data.playergamelogs.gamelogs;
+      this.gameLogs.reverse();
+      this.mostRecentGame = this.gameLogs[0];
       console.log(this.gameLogs);
     });
   }

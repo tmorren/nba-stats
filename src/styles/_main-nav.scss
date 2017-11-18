@@ -1,11 +1,11 @@
 nav.main-nav {
-    background-color: #333;
+    background-color: $dark-gray;
     overflow: hidden;
 
     a{
         float: left;
         display: block;
-        color: #f2f2f2;
+        color: $light-gray;
         text-align: center;
         padding: 14px 16px;
         text-decoration: none;
@@ -13,13 +13,13 @@ nav.main-nav {
     }
 
     a:hover {
-        background-color: #ddd;
-        color: black;
+        background-color: $light-gray;
+        color: $dark-gray;
     }
 
     .active {
-        background-color: #4CAF50;
-        color: white;
+        background-color: $blue;
+        color: $light-gray;
     }
 
     .icon {

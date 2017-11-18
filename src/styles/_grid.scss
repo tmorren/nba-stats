@@ -25,6 +25,16 @@
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-gap: 20px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.card-row-3{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 // On small devices, each col-md takes up the full width
