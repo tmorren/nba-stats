@@ -1,8 +1,9 @@
-<div *ngFor="let team of teams">
-    <div class="card">
-      <div class="card-block">
-        <img src="assets/imgs/{{team.team.Abbreviation}}.png" style="">
-        <a [routerLink]="[team.team.Abbreviation]">{{ team.team.City }} {{ team.team.Name }}</a>
+<div class="card-row-4" >
+    <a *ngFor="let team of teams" class="team-list-card" [routerLink]="[team.team.Abbreviation]">
+      <img src="assets/imgs/{{team.team.Abbreviation}}.png">
+      <div class="team-list-info">
+        <!-- <a [routerLink]="[team.team.Abbreviation]">{{ team.team.City }} {{ team.team.Name }}</a> -->
+        <span>{{ team.stats.Wins['#text'] }} - {{ team.stats.Losses['#text'] }}</span>
       </div>
-    </div>
+    </a>
 </div>

@@ -1,61 +1,55 @@
 <div *ngIf="player">
 
-  <div class="row box">
-    <div class="col-md-3">
-        <h1>{{ player.FirstName }} {{ player.LastName }}</h1>
-        <img src="{{ player.officialImageSrc }}">
+  <div class="card-row-3">
+
+    <div class="stat-card stat-card__blue">
+      <h1>{{ player.FirstName }} {{ player.LastName }}</h1><br>
+      <img class="stat-player-image" src="{{ player.officialImageSrc }}">
+      <div class="stat-player-info">
+          <span class="stat-player-info__big">#{{ player.JerseyNumber}} | {{ player.Position }}</span>
+          <span>{{ player.Age }} years old</span>
+          <span>{{ player.Height}} | {{ player.Weight}} lbs</span>
+      </div>
+      
     </div>
-    <div class="col-md-9">
-      <div class="flex-container">
-          <p>This is a test</p>
+
+    <div class="stat-card stat-card__dark_gray">
+      <h3>Season Stats</h3>
+      <div class="stats-season">
+        <div class="row">
+          <div class="col-md-4 stat__big">
+              {{ player.PtsPerGame['#text'] }} PPG
+          </div>
+          <div class="col-md-4 stat__big">
+              {{ player.RebPerGame['#text'] }} RPG
+          </div>
+          <div class="col-md-4 stat__big">
+              {{ player.AstPerGame['#text'] }} APG
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+              {{ player.StlPerGame['#text'] }} SPG
+          </div>
+          <div class="col-md-4">
+              {{ player.BlkPerGame['#text'] }} BPG
+          </div>
+          <div class="col-md-3">
+          </div>
+          <div class="col-md-3">
+          </div>
+        </div>
       </div>
     </div>
+
+    <div class="stat-card stat-card__purple">
+      <h3>Previous Game</h3>
+      <span>{{ player.PtsPerGame['#text'] }} Points Per Game</span>
+    </div>
+
   </div>
 
-  <div class="card-row-3">
-    <div class="stat-card stat-card__blue">
-      <i class="fa fa-dribbble"></i>
-      <div class="stat-info">
-          <h2>{{ player.PtsPerGame['#text'] }}</h2>
-          <span>Points Per Game</span>
-      </div>
-    </div>
-    <div class="stat-card stat-card__red">
-      <i class="fa fa-dribbble fa-4x"></i>
-      <div class="stat-info">
-          <h2>{{ player.RebPerGame['#text'] }}</h2>
-          <span>Rebounds Per Game</span>
-      </div>
-    </div>
-    <div class="stat-card stat-card__green">
-      <i class="fa fa-dribbble"></i>
-      <div class="stat-info">
-          <h2>{{ player.AstPerGame['#text'] }}</h2>
-          <span>Assists Per Game</span>
-      </div>
-    </div>
-    <div class="stat-card stat-card__yellow">
-      <i class="fa fa-dribbble"></i>
-      <div class="stat-info">
-          <h2>{{ player.StlPerGame['#text'] }}</h2>
-          <span>Rebounds Per Game</span>
-      </div>
-    </div>
-    <div class="stat-card stat-card__red">
-      <i class="fa fa-dribbble"></i>
-      <div class="stat-info">
-          <h2>{{ player.BlkPerGame['#text'] }}</h2>
-          <span>Points Per Game</span>
-      </div>
-    </div>
-    <div class="stat-card stat-card__green">
-      <i class="fa fa-dribbble"></i>
-      <div class="stat-info">
-          <h2>{{ player.TovPerGame['#text'] }}</h2>
-          <span>Points Per Game</span>
-      </div>
-    </div>
-  </div>
 </div>
 
 
