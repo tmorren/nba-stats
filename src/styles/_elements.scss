@@ -67,6 +67,13 @@
         }
     }
 
+    .stat-card-shooting{
+        font-size: .75em;
+        font-weight: 300;
+        font-style: italic;
+
+    }
+
     *{
         margin-top: 0;
         margin-bottom: 0;
@@ -112,6 +119,17 @@
 
     transition-property: color,background-color,box-shadow,transform;
     transition-duration: .15s;
+
+    .team-list-rank{
+        text-align: right;
+        font-style: italic;
+    }
+
+    .team-list-record{
+        text-align: right;
+        font-style: italic;
+        font-size: 1.25em;
+    }
 
     img{
         display: block;

@@ -3,7 +3,11 @@
       <img src="assets/imgs/{{team.team.Abbreviation}}.png">
       <div class="team-list-info">
         <!-- <a [routerLink]="[team.team.Abbreviation]">{{ team.team.City }} {{ team.team.Name }}</a> -->
-        <span>{{ team.stats.Wins['#text'] }} - {{ team.stats.Losses['#text'] }}</span>
+        <h2 class="team-list-rank">#{{ team.rank }}</h2>
+        <div class="team-list-record">
+          <span class="team-list-wins">{{ team.stats.Wins['#text'] }}</span>-<span class="team-list-losses">{{ team.stats.Losses['#text'] }}</span>
+        </div>
+        
       </div>
     </a>
 </div>

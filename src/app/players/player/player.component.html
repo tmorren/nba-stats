@@ -4,6 +4,7 @@
 
     <div class="stat-card stat-card__blue">
       <h1>{{ player.FirstName }} {{ player.LastName }}</h1><br>
+      <h2 *ngIf="player.ID==9659">FRIEND</h2>
       <img class="stat-player-image" src="{{ player.officialImageSrc }}">
       <div class="stat-player-info">
           <span class="stat-player-info__big">#{{ player.JerseyNumber}} | {{ player.Position }}</span>
@@ -35,11 +36,29 @@
           <div class="col-md-4">
               {{ player.BlkPerGame['#text'] }} BPG
           </div>
-          <div class="col-md-3">
-          </div>
-          <div class="col-md-3">
+          <div class="col-md-4">
+              {{ player.TovPerGame['#text'] }} TOPG
           </div>
         </div>
+
+        <br>
+        <hr>
+        <br>
+
+        <div class="row">
+            <div class="col-md-4 stat__big">
+                {{ player.FgPct['#text'] }} FG%<br>
+                <span class="stat-card-shooting">{{ player.FgMadePerGame['#text'] }}-{{ player.FgAttPerGame['#text'] }}</span>
+            </div>
+            <div class="col-md-4 stat__big">
+                {{ player.Fg3PtPct['#text'] }} 3P%<br>
+                <span class="stat-card-shooting">{{ player.Fg3PtMadePerGame['#text'] }}-{{ player.Fg3PtAttPerGame['#text'] }}</span>
+            </div>
+            <div class="col-md-4 stat__big">
+                {{ player.FtPct['#text'] }} FT%<br>
+                <span class="stat-card-shooting">{{ player.FtMadePerGame['#text'] }}-{{ player.FtAttPerGame['#text'] }}</span>
+            </div>
+          </div>
       </div>
     </div>
 
