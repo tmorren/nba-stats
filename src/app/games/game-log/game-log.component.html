@@ -12,24 +12,53 @@
         {{ gamelog.game.date }}
       </ng-template>
     </p-column>
-    <p-column header="Points" sortable="custom" (sortFunction)="sortPlayers(players, 'PtsPerGame')">
-      <ng-template let-gamelog="rowData" pTemplate="body"  let-sort="sortFn">
+    <p-column header="Points">
+      <ng-template let-gamelog="rowData" pTemplate="body">
         {{ gamelog.stats.Pts['#text'] }}
       </ng-template>
     </p-column>
-    <p-column header="Rebounds" sortable="custom" (sortFunction)="sortPlayers(players, 'PtsPerGame')">
-      <ng-template let-gamelog="rowData" pTemplate="body"  let-sort="sortFn">
+    <p-column header="Rebounds">
+      <ng-template let-gamelog="rowData" pTemplate="body">
         {{ gamelog.stats.Reb['#text'] }}
       </ng-template>
     </p-column>
-    <p-column header="Assists" sortable="custom" (sortFunction)="sortPlayers(players, 'PtsPerGame')">
-      <ng-template let-gamelog="rowData" pTemplate="body"  let-sort="sortFn">
+    <p-column header="Assists">
+      <ng-template let-gamelog="rowData" pTemplate="body">
         {{ gamelog.stats.Ast['#text'] }}
       </ng-template>
     </p-column>
+    <p-column header="Steals" >
+      <ng-template let-gamelog="rowData" pTemplate="body">
+        {{ gamelog.stats.Stl['#text'] }}
+      </ng-template>
+    </p-column>
+    <p-column header="Blocks">
+      <ng-template let-gamelog="rowData" pTemplate="body">
+        {{ gamelog.stats.Blk['#text'] }}
+      </ng-template>
+    </p-column>
+    <p-column header="Turnovers">
+      <ng-template let-gamelog="rowData" pTemplate="body">
+        {{ gamelog.stats.Tov['#text'] }}
+      </ng-template>
+    </p-column>
     <ng-template let-gamelog pTemplate="rowexpansion">
-      <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px">
-          {{ gamelog.stats.Ast['#text']}}
+      <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px;">
+          <div class="row">
+            <div class="col-md-4">
+                <h5>Misc</h5>
+              </div>
+            <div class="col-md-4">
+              <h5>Offense</h5>
+              {{ gamelog.stats.FgPct['#text'] }} FG% ({{ gamelog.stats.FgMade['#text'] }}/{{ gamelog.stats.FgAtt['#text'] }})<br>
+              {{ gamelog.stats.Fg3PtPct['#text'] }} 3P% ({{ gamelog.stats.Fg3PtMade['#text'] }}/{{ gamelog.stats.Fg3PtAtt['#text'] }})<br>
+              {{ gamelog.stats.FtPct['#text'] }} 3P% ({{ gamelog.stats.FtMade['#text'] }}/{{ gamelog.stats.FtAtt['#text'] }})<br>
+            </div>
+            <div class="col-md-4">
+              <h5>Defense</h5>
+              {{ gamelog.stats.Tov['#text'] }}
+            </div>
+          </div>
       </div>
     </ng-template>
   </p-dataTable>
