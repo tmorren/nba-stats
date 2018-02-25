@@ -1,6 +1,6 @@
 <div *ngIf="player">
 
-  <div class="card-row-3">
+  <div class="card-row-3" *ngIf="player">
 
     <div class="stat-card stat-card__blue">
       <h1>{{ player.FirstName }} {{ player.LastName }}</h1><br>
@@ -62,8 +62,51 @@
     </div>
 
     <div class="stat-card stat-card__purple">
-      <h3>Previous Game</h3>
-      <span>{{ player.PtsPerGame['#text'] }} Points Per Game</span>
+        <h3>Past Month</h3>
+        <div *ngIf="gameLogs" class="stats-season">
+            <div class="row">
+                <div class="col-md-4 stat__big">
+                    {{ monthAverages['Pts'].average }} Pts
+                </div>
+                <div class="col-md-4 stat__big">
+                    {{ monthAverages['Reb'].average }} Reb
+                </div>
+                <div class="col-md-4 stat__big">
+                    {{ monthAverages['Ast'].average }} Ast
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    {{ monthAverages['Stl'].average}} Stl
+                </div>
+                <div class="col-md-4">
+                    {{ monthAverages['Blk'].average }} Blk
+                </div>
+                <div class="col-md-4">
+                    {{ monthAverages['Tov'].average }} Tov
+                </div>
+            </div>
+
+            <br>
+            <hr>
+            <br>
+
+            <div class="row">
+                <div class="col-md-4 stat__big">
+                    {{  monthAverages['FgPct'].total }} FG%<br>
+                    <span class="stat-card-shooting">{{ monthAverages['FgMade'].average }}-{{ monthAverages['FgAtt'].average }}</span>
+                </div>
+                <div class="col-md-4 stat__big">
+                    {{  monthAverages['Fg3PtPct'].total }} 3P%<br>
+                    <span class="stat-card-shooting">{{ monthAverages['Fg3PtMade'].average }}-{{ monthAverages['Fg3PtAtt'].average }}</span>
+                </div>
+                <div class="col-md-4 stat__big">
+                    {{ monthAverages['FtPct'].total }} FT%<br>
+                    <span class="stat-card-shooting">{{ monthAverages['FtMade'].average }}-{{ monthAverages['FtAtt'].average }}</span>
+                </div>
+            </div>
+        </div>
     </div>
 
   </div>

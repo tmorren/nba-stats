@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { PlayersService } from '../players.service';
 import { Subscription } from 'rxjs/Subscription';
 
+/** CLASSES */
 import { Functions } from '../../shared/functions';
 import { Player } from '../../shared/classes/player';
+
+/** SERVICES */
+import { PlayersService } from '../players.service';
+import { GamesService } from '../../games/games.service';
 
 @Component({
   selector: 'app-player',
@@ -13,6 +17,8 @@ import { Player } from '../../shared/classes/player';
 })
 export class PlayerComponent implements OnInit {
 
+  gameLogs;
+  monthAverages;
   player: Player;
   selectedPlayer: number;
   stream: Subscription;
@@ -21,7 +27,9 @@ export class PlayerComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private playersService: PlayersService) { 
+    private playersService: PlayersService,
+    private gamesService: GamesService
+  ) { 
 
   }
 
@@ -34,7 +42,8 @@ export class PlayerComponent implements OnInit {
 
       this.player = new Player;
       this.getPlayerStats(this.selectedPlayer);
-      this.getPlayerInfo(this.selectedPlayer)
+      this.getPlayerInfo(this.selectedPlayer);
+      this.getPlayerGameLogPastMonth(this.selectedPlayer);
     });
 
     //this.mainStats.push(this.player.PtsPerGame);
@@ -57,4 +66,34 @@ export class PlayerComponent implements OnInit {
     });
   }
 
+  getPlayerGameLogPastMonth(player) {
+    this.gamesService.getPlayerGameLogPastMonth(player).subscribe( (data) => {
+      this.gameLogs = data.playergamelogs.gamelogs;
+      this.gameLogs.reverse();
+      console.log(this.gameLogs);
+
+      const averages = ['Pts', 'Reb', 'Ast', 'Stl', 'Blk', 'Tov', 'FgMade', 'FgAtt',
+                        'Fg3PtMade', 'Fg3PtAtt', 'FtMade', 'FtAtt'];
+      this.monthAverages = [];
+
+      for(let stat of averages) {
+        this.monthAverages[stat] = [];
+        this.monthAverages[stat]['total'] = 0;
+        for(let i=0; i < this.gameLogs.length; i++) {
+          this.monthAverages[stat]['total'] += Number(this.gameLogs[i].stats[stat]['#text']);
+        }
+        this.monthAverages[stat]['average'] = Number((this.monthAverages[stat]['total'] / this.gameLogs.length).toFixed(1));
+      }
+
+      this.monthAverages['FgPct'] = [];
+      this.monthAverages['Fg3PtPct'] = [];
+      this.monthAverages['FtPct'] = [];
+
+      this.monthAverages['FgPct']['total'] = ((this.monthAverages['FgMade']['average'] / this.monthAverages['FgAtt']['average']) * 100).toFixed(1);
+      this.monthAverages['Fg3PtPct']['total'] = ((this.monthAverages['Fg3PtMade']['average'] / this.monthAverages['Fg3PtAtt']['average']) * 100).toFixed(1);
+      this.monthAverages['FtPct']['total'] = ((this.monthAverages['FtMade']['average'] / this.monthAverages['FtAtt']['average']) * 100).toFixed(1);
+
+      console.log(this.monthAverages);
+    });
+  }
 }
