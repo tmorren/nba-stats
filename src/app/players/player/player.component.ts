@@ -23,7 +23,6 @@ export class PlayerComponent implements OnInit {
   selectedPlayer: number;
   stream: Subscription;
   watchForIdChange: Subscription;
-  //mainStats = [];
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -46,7 +45,6 @@ export class PlayerComponent implements OnInit {
       this.getPlayerGameLogPastMonth(this.selectedPlayer);
     });
 
-    //this.mainStats.push(this.player.PtsPerGame);
     console.log(this.player);
   }
 
@@ -70,7 +68,6 @@ export class PlayerComponent implements OnInit {
     this.gamesService.getPlayerGameLogPastMonth(player).subscribe( (data) => {
       this.gameLogs = data.playergamelogs.gamelogs;
       this.gameLogs.reverse();
-      console.log(this.gameLogs);
 
       const averages = ['Pts', 'Reb', 'Ast', 'Stl', 'Blk', 'Tov', 'FgMade', 'FgAtt',
                         'Fg3PtMade', 'Fg3PtAtt', 'FtMade', 'FtAtt'];
@@ -92,8 +89,6 @@ export class PlayerComponent implements OnInit {
       this.monthAverages['FgPct']['total'] = ((this.monthAverages['FgMade']['average'] / this.monthAverages['FgAtt']['average']) * 100).toFixed(1);
       this.monthAverages['Fg3PtPct']['total'] = ((this.monthAverages['Fg3PtMade']['average'] / this.monthAverages['Fg3PtAtt']['average']) * 100).toFixed(1);
       this.monthAverages['FtPct']['total'] = ((this.monthAverages['FtMade']['average'] / this.monthAverages['FtAtt']['average']) * 100).toFixed(1);
-
-      console.log(this.monthAverages);
     });
   }
 }

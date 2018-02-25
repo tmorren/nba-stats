@@ -1,6 +1,6 @@
 <div *ngIf="player">
 
-  <div class="card-row-3" *ngIf="player">
+  <div class="card-row-3">
 
     <div class="stat-card stat-card__blue">
       <h1>{{ player.FirstName }} {{ player.LastName }}</h1><br>
@@ -66,25 +66,25 @@
         <div *ngIf="gameLogs" class="stats-season">
             <div class="row">
                 <div class="col-md-4 stat__big">
-                    {{ monthAverages['Pts'].average }} Pts
+                    {{ monthAverages['Pts'].average }} PPG
                 </div>
                 <div class="col-md-4 stat__big">
-                    {{ monthAverages['Reb'].average }} Reb
+                    {{ monthAverages['Reb'].average }} RPG
                 </div>
                 <div class="col-md-4 stat__big">
-                    {{ monthAverages['Ast'].average }} Ast
+                    {{ monthAverages['Ast'].average }} APG
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-4">
-                    {{ monthAverages['Stl'].average}} Stl
+                    {{ monthAverages['Stl'].average}} SPG
                 </div>
                 <div class="col-md-4">
-                    {{ monthAverages['Blk'].average }} Blk
+                    {{ monthAverages['Blk'].average }} BPB
                 </div>
                 <div class="col-md-4">
-                    {{ monthAverages['Tov'].average }} Tov
+                    {{ monthAverages['Tov'].average }} TOPG
                 </div>
             </div>
 
@@ -112,8 +112,6 @@
   </div>
 
 </div>
-
-
 
 <div *ngIf="player.ID">
     <app-game-log  [(player)]="player.ID"></app-game-log>
