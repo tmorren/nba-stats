@@ -12,6 +12,31 @@ export class PlayersService {
 
   constructor(public http: HttpClient) { }
 
+  getLeagueLeaders(stat, season = "latest", limit?,  position?) {
+    let requestUrl = environment.baseUrl + `/${season}/cumulative_player_stats.json`;
+    const headers = new HttpHeaders();
+
+    let params = new HttpParams();
+
+    params = params.append('playerstats', stat);
+    params = params.append('limit', limit);
+
+    if (limit) {
+      params = params.append('limit', limit);
+    } else {
+      params = params.append('limit', '10');
+    }
+
+    if(position) {
+      params = params.append('position', position);
+    }
+
+    params = params.append('sort', `stats.${stat}.D`);
+    
+
+    return this.http.get(requestUrl, {headers: headers, params: params}).map((res: any) => res);
+  }
+
   getPlayers(team = null, season = "latest"){
     let requestUrl = environment.baseUrl + `/${season}/cumulative_player_stats.json`;
     const headers = new HttpHeaders();

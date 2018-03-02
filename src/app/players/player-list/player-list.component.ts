@@ -33,13 +33,8 @@ export class PlayerListComponent implements OnInit {
         player = Object.assign(player, playerInfo);
         player = Object.assign(player, playerStats);
         this.players.push(player);
-        console.log(player.FirstName);
       }
-      
-      console.log(this.players);
     });
   }
-
-  sortPlayers(players, sortBy){
-  }
+  
 }

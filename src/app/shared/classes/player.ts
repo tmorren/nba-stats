@@ -97,5 +97,9 @@ export class Player {
 
 
     constructor(){
+        this.LastName = '';
+        this.FirstName = '';
+        this.JerseyNumber = 0;
+        this.Position = '';
 	}
 }

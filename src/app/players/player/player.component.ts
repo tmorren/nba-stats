@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -18,10 +18,15 @@ import { GamesService } from '../../games/games.service';
 export class PlayerComponent implements OnInit {
 
   gameLogs;
+  leagueTopStat = [];
   monthAverages;
+  monthStatsLoaded: boolean = false;
   player: Player;
   selectedPlayer: number;
   stream: Subscription;
+  statsLoaded: boolean = false;
+  subscription: Subscription[] = [];
+  infoLoaded: boolean = false;
   watchForIdChange: Subscription;
 
   constructor(private route: ActivatedRoute,
@@ -33,19 +38,60 @@ export class PlayerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.watchForIdChange = this.route.params.subscribe(params => {
-      this.selectedPlayer = params['id'];
-      if(this.stream) {
-        this.stream.unsubscribe();
-      }
+    this.watchForIdChange = this.route.params.subscribe(
+      (params) => {
+        this.selectedPlayer = params['id'];
+        if(this.stream) {
+          this.stream.unsubscribe();
+        }
 
-      this.player = new Player;
-      this.getPlayerStats(this.selectedPlayer);
-      this.getPlayerInfo(this.selectedPlayer);
-      this.getPlayerGameLogPastMonth(this.selectedPlayer);
-    });
+        this.player = new Player;
+
+        this.getPlayerStats(this.selectedPlayer);
+        this.getPlayerInfo(this.selectedPlayer);
+        this.getPlayerGameLogPastMonth(this.selectedPlayer);
+      },
+      (err) => console.log('Error!'),
+      ()=> this.getPlayerStats(this.selectedPlayer)
+    );
 
     console.log(this.player);
+  }
+
+  getLeagueLeaderStatsByPosition() {
+    const stats = [
+      {
+        'stat' : 'PtsPerGame',
+        'abbr' : 'PTS/G'
+      },
+      {
+        'stat' : 'AstPerGame',
+        'abbr' : 'AST/G'
+      },
+      {
+        'stat' : 'RebPerGame',
+        'abbr' : 'REB/G'
+      },
+      {
+        'stat' : 'StlPerGame',
+        'abbr' : 'STL/G'
+      },
+      {
+        'stat' : 'BlkPerGame',
+        'abbr' : 'BS/G'
+      }
+    ];
+
+    stats.forEach( stat => {
+      const sub = this.playersService.getLeagueLeaders(stat['abbr'], 'latest', 1, this.player.Position).subscribe( (data) => {
+        console.log(data);
+        console.log(stat);
+        console.log(data.cumulativeplayerstats.playerstatsentry[0].stats);
+        this.leagueTopStat[stat['abbr']] = data.cumulativeplayerstats.playerstatsentry[0].stats[stat.stat]['#text'];
+      });
+      this.subscription.push(sub);
+    });
+    
   }
 
   getPlayerInfo(player){
@@ -53,7 +99,8 @@ export class PlayerComponent implements OnInit {
       let playerInfo = data.activeplayers.playerentry[0].player;
       
       this.player = Object.assign(this.player, playerInfo);
-    });
+      this.getLeagueLeaderStatsByPosition();
+    })
   }
 
   getPlayerStats(player){
@@ -61,12 +108,16 @@ export class PlayerComponent implements OnInit {
       let playerStats = data.cumulativeplayerstats.playerstatsentry[0].stats;
 
       this.player = Object.assign(this.player, playerStats);
+      this.statsLoaded = true;
     });
   }
 
   getPlayerGameLogPastMonth(player) {
     this.gamesService.getPlayerGameLogPastMonth(player).subscribe( (data) => {
       this.gameLogs = data.playergamelogs.gamelogs;
+      if (this.gameLogs.length < 0){
+        return [];
+      }
       this.gameLogs.reverse();
 
       const averages = ['Pts', 'Reb', 'Ast', 'Stl', 'Blk', 'Tov', 'FgMade', 'FgAtt',
@@ -89,6 +140,21 @@ export class PlayerComponent implements OnInit {
       this.monthAverages['FgPct']['total'] = ((this.monthAverages['FgMade']['average'] / this.monthAverages['FgAtt']['average']) * 100).toFixed(1);
       this.monthAverages['Fg3PtPct']['total'] = ((this.monthAverages['Fg3PtMade']['average'] / this.monthAverages['Fg3PtAtt']['average']) * 100).toFixed(1);
       this.monthAverages['FtPct']['total'] = ((this.monthAverages['FtMade']['average'] / this.monthAverages['FtAtt']['average']) * 100).toFixed(1);
+
+      this.monthStatsLoaded = true;
     });
+  }
+
+  ngOnDestroy() {
+    if (this.stream) {
+      this.stream.unsubscribe();
+    }
+    if (this.watchForIdChange) {
+      this.watchForIdChange.unsubscribe();
+    }
+
+    for (const sub of this.subscription) {
+        sub.unsubscribe();
+    }
   }
 }
