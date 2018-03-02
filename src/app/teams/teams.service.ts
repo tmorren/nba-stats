@@ -28,22 +28,23 @@ export class TeamsService {
     headers.set('Content-Type', 'application/json; charset=utf-8');
 
     const params = new HttpParams()
-    .set('team', String(team))
-    .set('teamstats', 'W');
+    .set('team', String(team));
+    //.set('teamstats', 'W');
     
     return this.http.get(requestUrl, {headers: headers, params: params}).map((res: any) => res);
   }
 
   getTeamPlayers(team, season = "latest"){
-    let requestUrl = environment.baseUrl + `/${season}/cumulative_player_stats.json`;// + team + "&playerstats=" + statsRequested;
+    let requestUrl = environment.baseUrl + `/${season}/cumulative_player_stats.json`;
 
     const headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json; charset=utf-8');
 
     const params = new HttpParams()
     .set('team', String(team))
-    .set('playerstats', 'PTS/G,AST/G,REB/G')
-    .set('sort', 'stats.PTS/G.d');
+    .set('playerstats', 'PTS/G,AST/G,REB/G,STL/G,BS/G')
+    .set('sort', 'stats.PTS/G.d')
+    .set('limit', '15');
     
 
     return this.http.get(requestUrl, {headers: headers, params: params}).map((res: any) => res);

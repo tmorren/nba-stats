@@ -47,6 +47,7 @@ export class TeamComponent implements OnInit {
       team = new Team;
       this.team = Object.assign(team, teamInfo);
       this.team = Object.assign(team, teamStats);
+      console.log(team);
     });
   }
 
