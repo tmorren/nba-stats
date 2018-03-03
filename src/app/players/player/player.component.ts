@@ -58,6 +58,10 @@ export class PlayerComponent implements OnInit {
     console.log(this.player);
   }
 
+  createRadarChart() {
+    console.log('Radar Chart!');
+  }
+
   getLeagueLeaderStatsByPosition() {
     const stats = [
       {
@@ -84,11 +88,15 @@ export class PlayerComponent implements OnInit {
 
     stats.forEach( stat => {
       const sub = this.playersService.getLeagueLeaders(stat['abbr'], 'latest', 1, this.player.Position).subscribe( (data) => {
-        console.log(data);
-        console.log(stat);
-        console.log(data.cumulativeplayerstats.playerstatsentry[0].stats);
         this.leagueTopStat[stat['abbr']] = data.cumulativeplayerstats.playerstatsentry[0].stats[stat.stat]['#text'];
-      });
+      },
+      (err) => console.log(err),
+      () => {
+        if (Object.keys(this.leagueTopStat).length >= stats.length) {
+          this.createRadarChart();
+        }
+      }
+    );
       this.subscription.push(sub);
     });
     
@@ -100,7 +108,7 @@ export class PlayerComponent implements OnInit {
       
       this.player = Object.assign(this.player, playerInfo);
       this.getLeagueLeaderStatsByPosition();
-    })
+    });
   }
 
   getPlayerStats(player){
