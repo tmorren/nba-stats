@@ -5,11 +5,12 @@ import { PlayersComponent } from './players.component';
 import { PlayerComponent } from './player/player.component';
 import { PlayerListComponent } from './player-list/player-list.component';
 import { GamesModule } from '../games/games.module'
-import { DataTableModule,SharedModule } from 'primeng/primeng';
+import { ChartModule,DataTableModule, SharedModule } from 'primeng/primeng';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
+    ChartModule,
     CommonModule,
     DataTableModule,
     GamesModule,
