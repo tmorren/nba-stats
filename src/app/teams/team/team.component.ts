@@ -59,7 +59,7 @@ export class TeamComponent implements OnInit {
     const sub = this.gamesService.getTeamGameLogPastMonth(team).subscribe( (data) => {
      // console.log(data);
       this.gameLogs = data.teamgamelogs.gamelogs;
-      //console.log(this.gameLogs);
+      console.log(this.gameLogs);
       if (this.gameLogs.length < 0){
         return [];
       }

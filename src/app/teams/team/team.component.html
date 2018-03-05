@@ -5,7 +5,26 @@
       <h1>{{ team.City }} {{ team.Name }}</h1><br>
       <img class="stat-team-image" src="assets/imgs/{{team.Abbreviation}}.png">
       <div class="stat-team-info">
-          <span class="stat-team-info__big">{{ team.Wins['#text'] }}W - {{ team.Losses['#text'] }}L</span>
+          <span class="stat-team-info__big" >{{ team.Wins['#text'] }}W - {{ team?.Losses['#text'] }}L</span>
+          <div *ngIf="gameLogs">
+            <h5>Last Game:</h5>
+            <div *ngIf="gameLogs[0].game.awayTeam.Abbreviation != team.Abbreviation">
+              <div>
+                  vs.  <a href="teams/{{gameLogs[0].game.awayTeam.Abbreviation}}"><img class="vs-image" src="assets/imgs/{{gameLogs[0].game.awayTeam.Abbreviation}}.png"></a>
+              </div>
+              <div class="vs-info">
+                <span *ngIf="gameLogs[0].stats.Wins['#text'] == 1" class="green-text"> {{ gameLogs[0].stats.Pts['#text'] }} - {{ gameLogs[0].stats.PtsAgainst['#text'] }} W</span>
+                <span *ngIf="gameLogs[0].stats.Wins['#text'] == 0" class="red-text"> {{ gameLogs[0].stats.Pts['#text'] }} - {{ gameLogs[0].stats.PtsAgainst['#text'] }} L</span>
+              </div>
+            </div>
+            <div *ngIf="gameLogs[0].game.homeTeam.Abbreviation != team.Abbreviation">
+              @  <a href="teams/{{gameLogs[0].game.homeTeam.Abbreviation}}"><img class="vs-image" src="assets/imgs/{{gameLogs[0].game.homeTeam.Abbreviation}}.png"></a>
+              <div class="vs-info">
+                <span *ngIf="gameLogs[0].stats.Wins['#text'] == 1" class="green-text"> {{ gameLogs[0].stats.Pts['#text'] }} - {{ gameLogs[0].stats.PtsAgainst['#text'] }} W</span>
+                <span *ngIf="gameLogs[0].stats.Wins['#text'] == 0" class="red-text"> {{ gameLogs[0].stats.Pts['#text'] }} - {{ gameLogs[0].stats.PtsAgainst['#text'] }} L</span>
+              </div>
+            </div>
+          </div>
       </div>
       
     </div>
@@ -117,7 +136,7 @@
     >
       <p-column header="Player" >
         <ng-template let-player="rowData" pTemplate="body">
-            <a [routerLink]="['/players', player.ID]">{{ player.FirstName }} {{player.LastName}}</a>
+            <a [routerLink]="['/players', player.ID]" class="bold-column">{{ player.FirstName }} {{player.LastName}}</a>
         </ng-template>
       </p-column>
       <p-column header="Pts/G" sortable="custom" (sortFunction)="sortPlayers(players, 'PtsPerGame')">
