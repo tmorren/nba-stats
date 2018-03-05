@@ -5,13 +5,15 @@ import { TeamsComponent } from './teams.component';
 import { TeamListComponent } from './team-list/team-list.component';
 import { TeamComponent } from './team/team.component';
 import { DataTableModule,SharedModule } from 'primeng/primeng';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
     CommonModule,
-    TeamsRoutingModule,
     DataTableModule,
-    SharedModule
+    MatProgressSpinnerModule,
+    SharedModule,
+    TeamsRoutingModule
   ],
   declarations: [
     TeamsComponent,

@@ -29,7 +29,7 @@
         margin-bottom: .5em;
     }
 
-    .stat-player-info{
+    .stat-player-info, .stat-team-info{
         box-sizing: border-box;
         display: block;
         padding: .5em;
@@ -37,7 +37,26 @@
         float: left;
         text-align: right;
 
-        .stat-player-info__big{
+        .stat-player-info__big, .stat-team-info__big,{
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+
+        span{
+            display: block;
+            padding-top: .25em;
+        }
+    }
+
+    .stat-team-info{
+        box-sizing: border-box;
+        display: block;
+        padding: .5em;
+        width: 60%;
+        float: left;
+        text-align: right;
+
+        .stat-team-info__big,{
             font-size: 1.5em;
             font-weight: 600;
         }
@@ -54,10 +73,14 @@
         float: left;
     }
 
+    .stat-team-image{
+        display: block;
+        width: 40%;
+        float: left;
+    }
+
     .stats-season{
         
-
-
         .row{
             padding-top: .25em;
             padding-bottom: .25em;
@@ -106,6 +129,11 @@
 
     &__orange{
         background: #E4572E;
+    }
+
+    &__white{
+        background: white;
+        color: $dark-gray;
     }
 }
 

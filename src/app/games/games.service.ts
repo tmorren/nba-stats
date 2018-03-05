@@ -48,5 +48,20 @@ export class GamesService {
     return this.http.get(requestUrl, {headers: headers, params: params}).map((res: any) => res);
   }
 
+  getTeamGameLogPastMonth(team, season = "latest"){
+    let requestUrl = environment.baseUrl + `/${season}/team_gamelogs.json`;
+    const headers = new HttpHeaders();
+
+    headers.set('Content-Type', 'application/json; charset=utf-8');
+
+    let params = new HttpParams();
+
+    params = params.append('team', team);
+    //params = params.append('limit', '20');
+    params = params.append('date', 'since-1-months-ago');
+
+    return this.http.get(requestUrl, {headers: headers, params: params}).map((res: any) => res);
+  }
+
   
 }
