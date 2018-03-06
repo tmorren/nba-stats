@@ -9,7 +9,6 @@ function navbarResponse() {
 
 $(document).ready(function(){
     $(".nav-link").click(function(){
-        console.log('Here');
         var x = document.getElementById("main-nav");
         x.className = "main-nav";
 	})

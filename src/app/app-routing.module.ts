@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent }  from './app.component';
+import { CompareComponent }  from './compare/compare.component';
 import { HomePageComponent } from './core/home-page/home-page.component';
 
 const routes: Routes = [
@@ -19,6 +20,10 @@ const routes: Routes = [
       {
         path: 'games',
         loadChildren: 'app/games/games.module#GamesModule'
+      },
+      {
+        path: 'compare',
+        component: CompareComponent
       },
     ]
   }

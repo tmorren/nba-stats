@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { CompareModule } from './compare/compare.module';
 import { CoreModule } from './core/core.module';
 import { TeamsModule } from './teams/teams.module';
 import { GamesModule } from './games/games.module';
@@ -22,6 +23,7 @@ import { AuthInterceptor } from './shared/auth-interceptor';
   imports: [
     BrowserModule,
     CoreModule,
+    CompareModule,
     HttpClientModule,
     HttpModule,
     TeamsModule,
