@@ -10,3 +10,7 @@
         </div>
     </div>
 </div>
+
+<div *ngIf="playerOne && playerTwo">
+    <app-player-compare [playerOneSelected]="playerOne" [playerTwoSelected]="playerTwo"></app-player-compare>
+</div>

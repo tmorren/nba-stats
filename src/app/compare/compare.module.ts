@@ -16,6 +16,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material';
 import { MatInputModule } from '@angular/material';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { PlayerCompareComponent } from './player-compare/player-compare.component';
 
 
 
@@ -34,7 +35,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   declarations: [
     CompareComponent,
     CompareSelectComponent,
-    CompareSelectedPlayerComponent
+    CompareSelectedPlayerComponent,
+    PlayerCompareComponent
   ]
 })
 export class CompareModule { }
