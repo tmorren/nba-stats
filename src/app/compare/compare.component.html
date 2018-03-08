@@ -1,3 +1,14 @@
-<p>
-    Compare works!
-</p>
+<div *ngIf="players && players.length > 0">
+    <div class="card-row-2">
+        <div class="card card__white">
+            <app-compare-select (selectedPlayer)="loadPlayer('one', $event)" [players]="players"></app-compare-select>
+            <div *ngIf="playerOne">
+                <h2>{{ playerOne.player.FirstName }} {{ playerOne.player.LastName }}</h2>
+                <img src="{{playerOne.player.officialImageSrc}}" >
+            </div>
+        </div>
+        <div class="card card__white">
+            <app-compare-select (selectedPlayer)="loadPlayer('two', $event)" [players]="players"></app-compare-select>
+        </div>
+    </div>
+</div>

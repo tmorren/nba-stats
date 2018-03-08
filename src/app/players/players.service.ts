@@ -12,6 +12,15 @@ export class PlayersService {
 
   constructor(public http: HttpClient) { }
 
+  getActivePlayers(season = "latest"){
+    let requestUrl = environment.baseUrl + `/${season}/active_players.json`;
+    const headers = new HttpHeaders();
+
+    let params = new HttpParams();
+
+    return this.http.get(requestUrl, {headers: headers, params: params}).map((res: any) => res);
+  }
+
   getLeagueLeaders(stat, season = "latest", limit?,  position?) {
     let requestUrl = environment.baseUrl + `/${season}/cumulative_player_stats.json`;
     const headers = new HttpHeaders();

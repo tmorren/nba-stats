@@ -13,6 +13,9 @@ import { GamesModule } from '../games/games.module'
 import { ChartModule,DataTableModule, SharedModule } from 'primeng/primeng';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
+/** SERVICES */
+import { PlayersService } from './players.service';
+
 @NgModule({
   imports: [
     ChartModule,
@@ -32,7 +35,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     PlayersComponent
   ],
   providers: [
-
+    PlayersService
   ]
 })
 export class PlayersModule { }
