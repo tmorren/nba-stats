@@ -2,13 +2,11 @@
     <div class="card-row-2">
         <div class="card card__white">
             <app-compare-select (selectedPlayer)="loadPlayer('one', $event)" [players]="players"></app-compare-select>
-            <div *ngIf="playerOne">
-                <h2>{{ playerOne.player.FirstName }} {{ playerOne.player.LastName }}</h2>
-                <img src="{{playerOne.player.officialImageSrc}}" >
-            </div>
+            <app-compare-selected-player *ngIf="playerOne" [player]="playerOne"></app-compare-selected-player>
         </div>
         <div class="card card__white">
             <app-compare-select (selectedPlayer)="loadPlayer('two', $event)" [players]="players"></app-compare-select>
+            <app-compare-selected-player *ngIf="playerTwo" [player]="playerTwo"></app-compare-selected-player>
         </div>
     </div>
 </div>

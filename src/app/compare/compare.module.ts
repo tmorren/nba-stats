@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 /** COMPONENTS */
 import { CompareComponent } from './compare.component';
 import { CompareSelectComponent } from './compare-select/compare-select.component';
+import { CompareSelectedPlayerComponent } from './compare-selected-player/compare-selected-player.component';
 //import { ComparePlayersComponent } from './compare-players/compare-players.component';
 
 /** MODULES */
@@ -15,6 +16,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material';
 import { MatInputModule } from '@angular/material';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 
 
 @NgModule({
@@ -31,7 +33,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   ],
   declarations: [
     CompareComponent,
-    CompareSelectComponent
+    CompareSelectComponent,
+    CompareSelectedPlayerComponent
   ]
 })
 export class CompareModule { }

@@ -45,8 +45,11 @@ export class CompareSelectComponent implements OnInit {
     });
   }
 
-  selectPlayer(player) {
-    this.selectedPlayer.emit(player);
+  selectPlayer(evt, player) {
+    if (evt.source.selected) {
+      this.selectedPlayer.emit(player);
+    }
+    
   }
 
 }

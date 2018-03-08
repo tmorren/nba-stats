@@ -42,11 +42,11 @@ export class CompareComponent implements OnInit {
 
   loadPlayer(player_number, player) {
     if(player_number == 'one') {
+      this.playerOne = new Player;
       this.playerOne = player;
-      console.log('Player one', this.playerOne);
     } else if (player_number == 'two') {
-      this.playerTwo = player
-      console.log('Player two', this.playerTwo);
+      this.playerTwo = new Player;
+      this.playerTwo = player;
     }
     
     this.getPlayerStats(player_number, player.player.ID);
