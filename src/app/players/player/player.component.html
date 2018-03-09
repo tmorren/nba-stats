@@ -120,13 +120,12 @@
 
 <div class="card-row-2">
     <div class="card">
-        <div>
-            <canvas [hidden]="!radarLoaded" id="radarChart" width="200" height="200">{{ radarChart }}</canvas>
-        </div>
+        <canvas [hidden]="!radarLoaded" id="radarChart" width="200" height="200">{{ radarChart }}</canvas>
         <mat-spinner *ngIf="!radarLoaded"></mat-spinner>
     </div>
     <div class="card">
-        <mat-spinner></mat-spinner>
+        <canvas [hidden]="!polarAreaLoaded" id="polarAreaChart" width="200" height="200">{{ polarAreaChart }}</canvas>
+        <mat-spinner *ngIf="!polarAreaLoaded"></mat-spinner>
     </div>
 </div>
 

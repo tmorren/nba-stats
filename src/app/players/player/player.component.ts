@@ -28,10 +28,11 @@ export class PlayerComponent implements OnInit {
   leagueTopStat = [];
   monthAverages;
   player: Player;
-  radarChartData: any;
+  // radarChartData: any;
   selectedPlayer: number;
 
   // Charts
+  polarAreaChart: any;
   radarChart: any;
   
   // Subscriptions
@@ -42,6 +43,7 @@ export class PlayerComponent implements OnInit {
   // Check if loaded
   infoLoaded: boolean = false;
   monthStatsLoaded: boolean = false;
+  polarAreaLoaded: boolean = false;
   radarLoaded: boolean = false;
   statsLoaded: boolean = false;
 
@@ -74,25 +76,22 @@ export class PlayerComponent implements OnInit {
   }
 
   createRadarChart() {
-    this.radarLoaded = true;
-    console.log('Radar Chart!');
-    console.log(this.leagueTopStat['AST/G']);
     this.radarChart = new Chart('radarChart', {
       type: 'radar',
       data: {
         labels: ['Pt', 'Reb', 'Ast', 'Stl', 'Blk'],
         datasets: [
             {
-                label: this.player.FirstName + ' ' + this.player.LastName,
-                backgroundColor: 'rgba(179,181,198,0.2)',
-                borderColor: 'rgba(179,181,198,1)',
-                pointBackgroundColor: 'rgba(179,181,198,1)',
+                label: 'Stat as  % of League Leader at ' + this.player.Position,
+                backgroundColor: 'rgba(77,173,247, .5)',
+                borderColor: '#228AE6',
+                pointBackgroundColor: '#228AE6',
                 pointBorderColor: '#fff',
                 pointHoverBackgroundColor: '#fff',
                 pointHoverBorderColor: 'rgba(179,181,198,1)',
                 data: [
                   this.player.PtsPerGame['#text'] / this.leagueTopStat['PTS/G'] * 100, 
-                  this.player.RebPerGame['#text'] / this.leagueTopStat['PTS/G'] * 100, 
+                  this.player.RebPerGame['#text'] / this.leagueTopStat['REB/G'] * 100, 
                   this.player.AstPerGame['#text'] / this.leagueTopStat['AST/G'] * 100, 
                   this.player.StlPerGame['#text'] / this.leagueTopStat['STL/G'] * 100, 
                   this.player.BlkPerGame['#text'] / this.leagueTopStat['BS/G'] * 100
@@ -106,10 +105,43 @@ export class PlayerComponent implements OnInit {
               min: 0,
               max: 100
           }
-      }
+        },
+        title: {
+          display: true,
+          text: this.player.FirstName + ' ' + this.player.LastName + ' vs. League Leader at ' + this.player.Position
+        }
       }
     });
     this.radarLoaded = true;
+  }
+
+  createPolarAreaChart() {
+    this.polarAreaChart = new Chart('polarAreaChart', {
+      type: 'polarArea',
+      data: {
+        labels: ['3Pt', '2PT', 'FT'],
+        datasets: [
+            {
+                backgroundColor: ['rgba(252,196,25, .5)', 'rgba(226,30,86, .5)', 'rgba(84,216,186, .5)'],
+                data: [
+                  this.player.Fg3PtMadePerGame['#text'] * 3, 
+                  this.player.Fg2PtMadePerGame['#text'] * 2,
+                  this.player.FtMadePerGame['#text'],
+                ]
+            }
+        ]
+      },
+      options: {
+        title: {
+          display: true,
+          text: this.player.FirstName + ' ' + this.player.LastName + ' Point Distribution - ' + this.player.PtsPerGame['#text'] + ' ppg'
+        },
+        animation: {
+          animationScale: false
+        }
+      }
+    });
+    this.polarAreaLoaded = true;
   }
 
   getLeagueLeaderStatsByPosition() {
@@ -146,6 +178,7 @@ export class PlayerComponent implements OnInit {
         if (Object.keys(this.leagueTopStat).length >= stats.length) {
           this.createRadarChart();
         }
+        this.createPolarAreaChart();
       }
     );
       this.subscription.push(sub);
