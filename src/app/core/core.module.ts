@@ -4,10 +4,14 @@ import { RouterModule } from '@angular/router';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { HomePageComponent } from './home-page/home-page.component'
 
+/** MODULES */
+import { SearchModule } from '../shared/search/search.module';
+
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    SearchModule
   ],
   exports: [
     MainNavComponent,

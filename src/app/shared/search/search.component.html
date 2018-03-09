@@ -1,0 +1,8 @@
+<mat-form-field class="compare-select-dropdown">
+  <input matInput placeholder="Player" aria-label="Player" [matAutocomplete]="auto" [formControl]="playerCtrl">
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let player of filteredPlayers | async" [value]="" (onSelectionChange)="selectPlayer($event, player)">
+      <span>{{ player.player.FirstName }} {{ player.player.LastName }}</span>
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

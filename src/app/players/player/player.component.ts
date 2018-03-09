@@ -32,7 +32,7 @@ export class PlayerComponent implements OnInit {
   selectedPlayer: number;
 
   // Charts
-  polarAreaChart: any;
+  doughnutChart: any;
   radarChart: any;
   
   // Subscriptions
@@ -43,7 +43,7 @@ export class PlayerComponent implements OnInit {
   // Check if loaded
   infoLoaded: boolean = false;
   monthStatsLoaded: boolean = false;
-  polarAreaLoaded: boolean = false;
+  doughnutLoaded: boolean = false;
   radarLoaded: boolean = false;
   statsLoaded: boolean = false;
 
@@ -115,9 +115,9 @@ export class PlayerComponent implements OnInit {
     this.radarLoaded = true;
   }
 
-  createPolarAreaChart() {
-    this.polarAreaChart = new Chart('polarAreaChart', {
-      type: 'polarArea',
+  createDoughnutChart() {
+    this.doughnutChart = new Chart('doughnutChart', {
+      type: 'doughnut',
       data: {
         labels: ['3Pt', '2PT', 'FT'],
         datasets: [
@@ -141,7 +141,7 @@ export class PlayerComponent implements OnInit {
         }
       }
     });
-    this.polarAreaLoaded = true;
+    this.doughnutLoaded = true;
   }
 
   getLeagueLeaderStatsByPosition() {
@@ -178,7 +178,7 @@ export class PlayerComponent implements OnInit {
         if (Object.keys(this.leagueTopStat).length >= stats.length) {
           this.createRadarChart();
         }
-        this.createPolarAreaChart();
+        this.createDoughnutChart();
       }
     );
       this.subscription.push(sub);
