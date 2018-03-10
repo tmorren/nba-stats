@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
+/** Chart.js */
+import { Chart } from 'chart.js';
+
 /** CLASSES */
 import { Functions } from '../../shared/functions';
 import { Team } from '../../shared/classes/team';
@@ -19,10 +22,15 @@ import { GamesService } from '../../games/games.service';
 export class TeamComponent implements OnInit {
 
   gameLogs;
+  leagueTopStat = [];
   monthAverages;
   players: Player[] = [];
   selectedTeam: string;
   team: Team;
+
+  // Charts
+  doughnutChart: any;
+  radarChart: any;
 
   // Subscriptions
   stream: Subscription;
@@ -32,6 +40,7 @@ export class TeamComponent implements OnInit {
   // Check if loaded
   infoLoaded: boolean = false;
   monthStatsLoaded: boolean = false;
+  doughnutLoaded: boolean = false;
   radarLoaded: boolean = false;
   statsLoaded: boolean = false;
 
@@ -55,11 +64,127 @@ export class TeamComponent implements OnInit {
     });
   }
 
+  createDoughnutChart() {
+    if(this.doughnutChart !== undefined){
+      this.doughnutChart.destroy();
+    }
+
+    this.doughnutChart = new Chart('doughnutChart', {
+      type: 'doughnut',
+      data: {
+        labels: ['3Pt', '2PT', 'FT'],
+        datasets: [
+            {
+                backgroundColor: ['rgba(252,196,25, .5)', 'rgba(226,30,86, .5)', 'rgba(84,216,186, .5)'],
+                data: [
+                  this.team.Fg3PtMadePerGame['#text'] * 3, 
+                  this.team.Fg2PtMadePerGame['#text'] * 2,
+                  this.team.FtMadePerGame['#text'],
+                ]
+            }
+        ]
+      },
+      options: {
+        title: {
+          display: true,
+          text: this.team.City + ' ' + this.team.Name + ' Point Distribution - ' + this.team.PtsPerGame['#text'] + ' ppg'
+        },
+        animation: false
+      }
+    });
+    this.doughnutLoaded = true;
+  }
+
+  createRadarChart() {
+    if(this.radarChart !== undefined){
+      this.radarChart.destroy();
+    }
+    
+    this.radarChart = new Chart('radarChart', {
+      type: 'radar',
+      data: {
+        labels: ['Pt', 'Reb', 'Ast', 'Stl', 'Blk'],
+        datasets: [
+            {
+                label: 'Stat as  % of League Leader',
+                backgroundColor: 'rgba(77,173,247, .5)',
+                borderColor: '#228AE6',
+                pointBackgroundColor: '#228AE6',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(179,181,198,1)',
+                data: [
+                  this.team.PtsPerGame['#text'] / this.leagueTopStat['PTS/G'] * 100, 
+                  this.team.RebPerGame['#text'] / this.leagueTopStat['REB/G'] * 100, 
+                  this.team.AstPerGame['#text'] / this.leagueTopStat['AST/G'] * 100, 
+                  this.team.StlPerGame['#text'] / this.leagueTopStat['STL/G'] * 100, 
+                  this.team.BlkPerGame['#text'] / this.leagueTopStat['BS/G'] * 100
+                ]
+            }
+        ]
+      },
+      options: {
+        scale: {
+          ticks: {
+              min: 0,
+              max: 100
+          }
+        },
+        title: {
+          display: true,
+          text: this.team.City + ' ' + this.team.Name + ' vs. League Leader'
+        },
+        animation: false
+      }
+    });
+    this.radarLoaded = true;
+  }
+
+  getLeagueLeaderStats() {
+    const stats = [
+      {
+        'stat' : 'PtsPerGame',
+        'abbr' : 'PTS/G'
+      },
+      {
+        'stat' : 'AstPerGame',
+        'abbr' : 'AST/G'
+      },
+      {
+        'stat' : 'RebPerGame',
+        'abbr' : 'REB/G'
+      },
+      {
+        'stat' : 'StlPerGame',
+        'abbr' : 'STL/G'
+      },
+      {
+        'stat' : 'BlkPerGame',
+        'abbr' : 'BS/G'
+      }
+    ];
+
+    stats.forEach( stat => {
+      const sub = this.teamsService.getLeagueLeaders(stat['abbr'], 'latest', 1).subscribe( (data) => {
+        this.leagueTopStat[stat['abbr']] = data.overallteamstandings.teamstandingsentry[0].stats[stat.stat]['#text'];
+      },
+      (err) => console.log(err),
+      () => {
+        if (Object.keys(this.leagueTopStat).length >= stats.length) {
+          this.createRadarChart();
+        }
+        this.createDoughnutChart();
+      }
+    );
+      this.subscription.push(sub);
+    });
+    
+  }
+
   getTeamGameLogPastMonth(team) {
     const sub = this.gamesService.getTeamGameLogPastMonth(team).subscribe( (data) => {
-     // console.log(data);
       this.gameLogs = data.teamgamelogs.gamelogs;
-      console.log(this.gameLogs);
+      
       if (this.gameLogs.length < 0){
         return [];
       }
@@ -100,6 +225,7 @@ export class TeamComponent implements OnInit {
       team = new Team;
       this.team = Object.assign(team, teamInfo);
       this.team = Object.assign(team, teamStats);
+      this.getLeagueLeaderStats();
       console.log(team);
     });
   }

@@ -64,6 +64,12 @@ export class PlayerComponent implements OnInit {
           this.stream.unsubscribe();
         }
 
+        this.infoLoaded = false;
+        this.monthStatsLoaded= false;
+        this.doughnutLoaded= false;
+        this.radarLoaded = false;
+        this.statsLoaded = false;
+
         this.player = new Player;
 
         this.getPlayerStats(this.selectedPlayer);
@@ -76,6 +82,10 @@ export class PlayerComponent implements OnInit {
   }
 
   createRadarChart() {
+    if(this.radarChart !== undefined){
+      this.radarChart.destroy();
+    }
+
     this.radarChart = new Chart('radarChart', {
       type: 'radar',
       data: {
@@ -109,14 +119,20 @@ export class PlayerComponent implements OnInit {
         title: {
           display: true,
           text: this.player.FirstName + ' ' + this.player.LastName + ' vs. League Leader at ' + this.player.Position
-        }
+        },
+        animation: false
       }
     });
     this.radarLoaded = true;
   }
 
   createDoughnutChart() {
+    if(this.doughnutChart !== undefined){
+      this.doughnutChart.destroy();
+    }
+
     this.doughnutChart = new Chart('doughnutChart', {
+
       type: 'doughnut',
       data: {
         labels: ['3Pt', '2PT', 'FT'],
@@ -136,9 +152,7 @@ export class PlayerComponent implements OnInit {
           display: true,
           text: this.player.FirstName + ' ' + this.player.LastName + ' Point Distribution - ' + this.player.PtsPerGame['#text'] + ' ppg'
         },
-        animation: {
-          animationScale: false
-        }
+        animation: false
       }
     });
     this.doughnutLoaded = true;
@@ -171,7 +185,6 @@ export class PlayerComponent implements OnInit {
     stats.forEach( stat => {
       const sub = this.playersService.getLeagueLeaders(stat['abbr'], 'latest', 1, this.player.Position).subscribe( (data) => {
         this.leagueTopStat[stat['abbr']] = data.cumulativeplayerstats.playerstatsentry[0].stats[stat.stat]['#text'];
-        console.log(data);
       },
       (err) => console.log(err),
       () => {

@@ -28,7 +28,6 @@ export class PlayersService {
     let params = new HttpParams();
 
     params = params.append('playerstats', stat);
-    params = params.append('limit', limit);
 
     if (limit) {
       params = params.append('limit', limit);

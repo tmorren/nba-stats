@@ -14,6 +14,30 @@ export class TeamsService {
 
   constructor(public http: HttpClient) { }
 
+  getLeagueLeaders(stat, season = "latest", limit?, conference?) {
+    let requestUrl = environment.baseUrl + `/${season}/overall_team_standings.json`;
+    const headers = new HttpHeaders();
+
+    let params = new HttpParams();
+
+    params = params.append('teamstats', stat);
+
+    if (limit) {
+      params = params.append('limit', limit);
+    } else {
+      params = params.append('limit', '10');
+    }
+
+    if (conference) {
+      params = params.append('division', conference);
+    }
+
+    params = params.append('sort', `stats.${stat}.D`);
+    
+
+    return this.http.get(requestUrl, {headers: headers, params: params}).map((res: any) => res);
+  }
+
   getTeamStandings(){
     const headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json; charset=utf-8');
