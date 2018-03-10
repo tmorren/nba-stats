@@ -22,12 +22,15 @@ export class MainNavComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.players = [];
     this.getActivePlayers();
   }
 
   getActivePlayers() {
     this.playersService.getActivePlayers().subscribe( 
       (data) => {
+        console.log('Here!!');
+        console.log(data);
         this.players = data.activeplayers.playerentry;
       },
       (err) => {

@@ -58,6 +58,14 @@ export class TeamComponent implements OnInit {
         this.stream.unsubscribe();
       }
 
+      if(this.radarChart !== undefined){
+        this.radarChart.destroy();
+      }
+
+      if(this.doughnutChart !== undefined){
+        this.doughnutChart.destroy();
+      }
+
       this.getTeamInfo(this.selectedTeam);
       this.getTeamPlayers(this.selectedTeam);
       this.getTeamGameLogPastMonth(this.selectedTeam);
@@ -184,7 +192,7 @@ export class TeamComponent implements OnInit {
   getTeamGameLogPastMonth(team) {
     const sub = this.gamesService.getTeamGameLogPastMonth(team).subscribe( (data) => {
       this.gameLogs = data.teamgamelogs.gamelogs;
-      
+
       if (this.gameLogs.length < 0){
         return [];
       }

@@ -7,7 +7,7 @@ nav.main-nav {
         display: block;
         color: $light-gray;
         text-align: center;
-        padding: 14px 16px;
+        padding: 25px 16px;
         text-decoration: none;
         font-size: 17px;
     }
@@ -24,6 +24,10 @@ nav.main-nav {
 
     .icon {
         display: none;
+    }
+
+    app-search{
+        color: white;
     }
 }
 

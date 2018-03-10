@@ -64,6 +64,18 @@ export class PlayerComponent implements OnInit {
           this.stream.unsubscribe();
         }
 
+        for (const sub of this.subscription) {
+          sub.unsubscribe();
+        }
+
+        if(this.doughnutChart !== undefined){
+          this.doughnutChart.destroy();
+        }
+
+        if(this.radarChart !== undefined){
+          this.radarChart.destroy();
+        }
+
         this.infoLoaded = false;
         this.monthStatsLoaded= false;
         this.doughnutLoaded= false;
