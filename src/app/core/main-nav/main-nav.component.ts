@@ -29,7 +29,6 @@ export class MainNavComponent implements OnInit {
   getActivePlayers() {
     this.playersService.getActivePlayers().subscribe( 
       (data) => {
-        console.log('Here!!');
         console.log(data);
         this.players = data.activeplayers.playerentry;
       },

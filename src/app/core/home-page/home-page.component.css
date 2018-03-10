@@ -1,0 +1,30 @@
+.page-title{
+    font-size: 2em;
+    margin: .67em 0;
+}
+
+small{
+    color: #b1afaf;
+    font-style: italic;
+}
+
+.card{
+    padding: 0;
+}
+
+.article-title a:hover{
+    color: #4DADF7;
+}
+
+.article-info{
+    padding: 10px 15px 15px;
+}
+
+.article-author{
+    padding-bottom: 10px;
+    font-size: .8em;
+}
+
+.article-description{
+    font-size: .9em;
+}
