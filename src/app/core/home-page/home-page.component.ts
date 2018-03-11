@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { Functions } from '../../shared/functions';
 
 /** CLASSES */
 import { Article } from '../../shared/classes/article';
@@ -18,6 +19,7 @@ export class HomePageComponent implements OnInit {
     articles: Article[] = [];
     // Subscriptions
     subscription: Subscription[] = [];
+    todaysDate;
 
   constructor(
     private homeService: HomeService
@@ -25,11 +27,11 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
     this.getNBANews();
+    this.todaysDate = Functions.getTodaysDateString();
   }
 
   getNBANews() {
     const sub = this.homeService.getNBANews().subscribe( (data) => {
-      console.log(data);
       this.articles = data.articles;
     });
     

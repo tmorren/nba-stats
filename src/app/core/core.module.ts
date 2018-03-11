@@ -9,10 +9,12 @@ import { HomeService } from './home-page/home.service';
 
 /** MODULES */
 import { SearchModule } from '../shared/search/search.module';
+import { GamesModule } from '../games/games.module';
 
 @NgModule({
   imports: [
     CommonModule,
+    GamesModule,
     RouterModule,
     SearchModule
   ],
