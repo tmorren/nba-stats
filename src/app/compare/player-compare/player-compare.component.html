@@ -1,23 +1,74 @@
-<div class="card-row-2">
-  <div class="card card__white">
-
-  </div>
-  <div class="card card__white">
-
-  </div>
+<!-- Stats compare row -->
+<div *ngIf="players.length == 2">
+    <p-dataTable 
+        [(value)]="players"
+    >
+      <p-column header="Player" >
+        <ng-template let-player="rowData" pTemplate="body">
+            <a [routerLink]="['/players', player.ID]" class="bold-column">{{ player['player'].FirstName }} {{ player['player'].LastName }}</a>
+        </ng-template>
+      </p-column>
+      <p-column header="Pts/G">
+        <ng-template let-player="rowData" pTemplate="body"  let-sort="sortFn">
+           {{ player.PtsPerGame['#text'] }}
+        </ng-template>
+      </p-column>
+      <p-column header="Reb/G">
+        <ng-template let-player="rowData" pTemplate="body">
+            {{ player.RebPerGame['#text'] }}
+        </ng-template>
+      </p-column>
+      <p-column header="Ast/G">
+        <ng-template let-player="rowData" pTemplate="body">
+            {{ player.AstPerGame['#text'] }}
+        </ng-template>
+      </p-column>
+      <p-column header="Stl/G">
+        <ng-template let-player="rowData" pTemplate="body">
+            {{ player.StlPerGame['#text'] }}
+        </ng-template>
+      </p-column>
+      <p-column header="Blk/G">
+        <ng-template let-player="rowData" pTemplate="body">
+            {{ player.BlkPerGame['#text'] }}
+        </ng-template>
+      </p-column>
+      <p-column header="TO/G">
+        <ng-template let-player="rowData" pTemplate="body">
+            {{ player.TovPerGame['#text'] }}
+        </ng-template>
+      </p-column>
+      <p-column header="FG%">
+        <ng-template let-player="rowData" pTemplate="body">
+            {{ player.FgPct['#text'] }}
+        </ng-template>
+      </p-column>
+      <p-column header="FT%">
+        <ng-template let-player="rowData" pTemplate="body">
+            {{ player.FtPct['#text'] }}
+        </ng-template>
+      </p-column>
+      <p-column header="3P%">
+        <ng-template let-player="rowData" pTemplate="body">
+            {{ player.Fg3PtPct['#text'] }}
+        </ng-template>
+      </p-column>
+    </p-dataTable>
 </div>
+
+<!-- Charts Row -->
 <div class="card-row-3">
   <div class="card card__white">
-      <canvas [hidden]="!playerOneDoughnutLoaded" id="playerOneDoughnutChart" width="200" height="200">{{ playerOneDoughnutChart }}</canvas>
-      <mat-spinner *ngIf="!playerOneDoughnutLoaded"></mat-spinner>
+    <canvas [hidden]="!playerOneDoughnutLoaded" id="playerOneDoughnutChart" width="200" height="200">{{ playerOneDoughnutChart }}</canvas>
+    <mat-spinner *ngIf="!playerOneDoughnutLoaded"></mat-spinner>
   </div>
   <div class="card card__white">
-      <canvas [hidden]="!radarLoaded" id="radarChart" width="200" height="200">{{ radarChart }}</canvas>
-      <mat-spinner *ngIf="!radarLoaded"></mat-spinner>
+    <canvas [hidden]="!radarLoaded" id="radarChart" width="200" height="200">{{ radarChart }}</canvas>
+    <mat-spinner *ngIf="!radarLoaded"></mat-spinner>
   </div>
   <div class="card card__white">
-      <canvas [hidden]="!playerTwoDoughnutLoaded" id="playerTwoDoughnutChart" width="200" height="200">{{ playerTwoDoughnutChart }}</canvas>
-      <mat-spinner *ngIf="!playerTwoDoughnutLoaded"></mat-spinner>
+    <canvas [hidden]="!playerTwoDoughnutLoaded" id="playerTwoDoughnutChart" width="200" height="200">{{ playerTwoDoughnutChart }}</canvas>
+    <mat-spinner *ngIf="!playerTwoDoughnutLoaded"></mat-spinner>
   </div>
 </div>
 

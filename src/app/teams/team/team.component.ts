@@ -66,6 +66,8 @@ export class TeamComponent implements OnInit {
         this.doughnutChart.destroy();
       }
 
+      Functions.sleep(1000);
+
       this.getTeamInfo(this.selectedTeam);
       this.getTeamPlayers(this.selectedTeam);
       this.getTeamGameLogPastMonth(this.selectedTeam);

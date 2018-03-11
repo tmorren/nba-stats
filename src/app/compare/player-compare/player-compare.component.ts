@@ -17,6 +17,7 @@ import { PlayersService } from '../../players/players.service';
   styleUrls: ['./player-compare.component.css']
 })
 export class PlayerCompareComponent implements OnInit {
+  players = [];
   playerOne: Player;
   playerTwo: Player;
   leagueTopStat = [];
@@ -36,6 +37,7 @@ export class PlayerCompareComponent implements OnInit {
   radarLoaded: boolean = false;
 
   @Input() set playerOneSelected(player){
+    this.players = [];
     this.playerOne = new Player;
     this.playerOne = player;
     if (this.playerTwo) {
@@ -51,6 +53,7 @@ export class PlayerCompareComponent implements OnInit {
     }
   };
   @Input() set playerTwoSelected(player){
+    this.players = [];
     this.playerTwo = new Player;
     this.playerTwo = player;
     if (this.playerOne) {
@@ -204,7 +207,8 @@ export class PlayerCompareComponent implements OnInit {
   initialStatsLoad(){
     console.log(this.playerOne);
     console.log(this.playerTwo);
-
+    this.players.push(this.playerOne);
+    this.players.push(this.playerTwo);
     if(Object.keys(this.leagueTopStat).length == 0) {
       this.getLeagueLeaderStats();
     } else {

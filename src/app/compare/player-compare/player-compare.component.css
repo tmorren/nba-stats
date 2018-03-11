@@ -1,0 +1,7 @@
+.stat-compare ul{
+    padding-left: 0;
+}
+
+.stat-compare li{
+    display: inline-block;
+}

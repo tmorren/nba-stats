@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DataTableModule,SharedModule } from 'primeng/primeng';
 
 /** COMPONENTS */
 import { CompareComponent } from './compare.component';
@@ -25,12 +26,14 @@ import { PlayerCompareComponent } from './player-compare/player-compare.componen
     BrowserAnimationsModule,
     CommonModule,
     CompareRoutingModule,
+    DataTableModule,
     FormsModule,
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
     ReactiveFormsModule,
+    SharedModule
   ],
   declarations: [
     CompareComponent,

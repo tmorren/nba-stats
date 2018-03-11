@@ -1,4 +1,12 @@
 <div *ngIf="selectedPlayer">
-    <h2>{{ selectedPlayer.player.FirstName }} {{ selectedPlayer.player.LastName }}</h2>
-    <img src="{{selectedPlayer.player.officialImageSrc}}" >
+    <div>
+        <h2>{{ selectedPlayer.player.FirstName }} {{ selectedPlayer.player.LastName }}</h2>
+        <img src="{{selectedPlayer.player.officialImageSrc}}">
+        <div class="stat-player-info">
+            <span class="stat-player-info__big">#{{ selectedPlayer?.player.JerseyNumber}} | {{ selectedPlayer.player.Position }}</span>
+            <span>{{ selectedPlayer.player.Age }} years old</span>
+            <span>{{ selectedPlayer.player.Height}} | {{ selectedPlayer.player.Weight}} lbs</span>
+            <span>{{ selectedPlayer.team.City }} {{ selectedPlayer.team.Name }}</span>
+        </div>
+    </div>
 </div>
