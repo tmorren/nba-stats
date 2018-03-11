@@ -12,6 +12,35 @@ export class GamesService {
 
   constructor(public http: HttpClient) { }
 
+  getGameList(date?, season="latest") {
+    let requestUrl = environment.baseUrl + `/${season}/scoreboard.json`;
+    const headers = new HttpHeaders();
+
+    headers.set('Content-Type', 'application/json; charset=utf-8');
+
+    let params = new HttpParams();
+
+    if(!date) {
+      var dateObj = new Date();
+      let month: any = dateObj.getMonth() + 1; //months from 1-12
+      let day: any = dateObj.getDate();
+      let year: any = dateObj.getFullYear();
+      
+      if(month < 10) {
+        month = "0" + String(month);
+      }
+
+      if(day < 10) {
+        day = "0" + String(day);
+      }
+      date = String(year) + String(month) + String(day);
+    }
+
+    params = params.append('fordate', date);
+
+    return this.http.get(requestUrl, {headers: headers, params: params}).map((res: any) => res);
+  }
+
   /** 
    *    Get game log for a player
    *    params ()

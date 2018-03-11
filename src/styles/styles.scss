@@ -10,4 +10,16 @@
 @import "_datatable.scss";
 
 
+/* Override Material Autocomplete style in nav bar */
+#main-nav > span > app-search > mat-form-field > div > div.mat-input-underline.mat-form-field-underline,
+#main-nav > span > app-search > mat-form-field > div > div.mat-input-underline.mat-form-field-underline > span{
+    background-color: white !important;
+}
 
+#main-nav > span > app-search > mat-form-field > div > div.mat-input-flex.mat-form-field-flex > div > span > label{
+    color: white;
+}
+
+#mat-input-0{
+    caret-color: white;
+}

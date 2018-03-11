@@ -27,5 +27,8 @@
     <a class="nav-link" routerLink="/games">Games <span class="sr-only">(current)</span></a>
     <a class="nav-link" routerLink="/compare">Compare <span class="sr-only">(current)</span></a>
     <a href="javascript:void(0);" class="icon" onclick="navbarResponse()">&#9776;</a>
-    <app-search *ngIf="players" [players]="players" (selectedPlayer)="navigateToPlayer($event)"></app-search>
+    <span class="main-nav-search">
+        <app-search *ngIf="players" [players]="players" (selectedPlayer)="navigateToPlayer($event)"></app-search>
+    </span>
+    
 </nav>
