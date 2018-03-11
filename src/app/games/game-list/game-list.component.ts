@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Functions } from '../../shared/functions';
 
 /** SERVICES */
 import { GamesService } from '../games.service';
@@ -10,37 +11,17 @@ import { GamesService } from '../games.service';
 })
 export class GameListComponent implements OnInit {
 
-  todaysGames = [];
+  todaysDate;
+  yesterdaysDate;
 
   constructor(
     private gamesService: GamesService
-  ) { }
-
-  ngOnInit() {
-    this.getTodaysGames();
+  ) { 
+    this.todaysDate = Functions.getTodaysDateString();
+    this.yesterdaysDate = Functions.getYesterdaysDateString();
   }
 
-  getTodaysGames() {
-    this.gamesService.getGameList().subscribe( 
-      (data) => {
-        this.todaysGames = data.scoreboard.gameScore;
-
-        for(let i = 0;i < this.todaysGames.length; i++ ){
-
-          if(this.todaysGames[i].currentQuarterSecondsRemaining){
-            let time = this.todaysGames[i].currentQuarterSecondsRemaining;
-            let minutes = Math.floor(time / 60);
-            let seconds = time - minutes * 60;
-            this.todaysGames[i].currentQuarterTimeRemaining = String(minutes) + ":" + String(seconds);
-          }
-        }
-        console.log(this.todaysGames);
-      },
-      (err) => {
-        console.log(err);
-        this.todaysGames = [];
-      }
-    )
+  ngOnInit() {
   }
 
 }

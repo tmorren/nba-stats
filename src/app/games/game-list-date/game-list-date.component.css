@@ -1,0 +1,20 @@
+.gameCard{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-gap: 20px;
+
+    text-align: center;
+}
+
+.gameInfoScore{
+    margin: .25em 0;
+}
+
+.gameInfo{
+    text-align: center;        
+}
+
+.page-title{
+    font-size: 2em;
+    margin: .67em 0;
+}

@@ -1,0 +1,42 @@
+<div *ngIf="title">
+  <span class="page-title">{{ title }}</span>
+</div>
+<div *ngIf="games && games.length > 0" class="card-row-3">
+  <div *ngFor="let game of games" class="card card__white gameCard">
+    <div>
+        <img src="assets/imgs/{{game.game.awayTeam.Abbreviation}}.png">
+        <span>Away</span>
+    </div>
+    <div class="gameInfo">
+      <h5>{{ game.game.location }}</h5>
+      <small>{{ game.game.time }}</small>
+
+      <!-- If game is in progress/completed -->
+      <div *ngIf="game.isInProgress == 'true' || game.isCompleted == 'true' || game.currentIntermission == '4'">
+        <h2 class="gameInfoScore">{{ game.awayScore}} - {{ game.homeScore }}</h2>
+        <div *ngIf="game.currentIntermission">
+          <small>End {{ game.currentIntermission }}</small><br>
+          <small></small>
+        </div>
+        <div *ngIf="game.isInProgress == 'true' && game.currentQuarter">
+          <small>Quarter {{ game.currentQuarter }}</small><br>
+          <small>{{ game.currentQuarterTimeRemaining }}</small>
+        </div>
+        <div *ngIf="game.isCompleted == 'true'">
+          <small>Final</small>
+        </div>
+      </div>
+
+      <!-- If game hasnt started yet -->
+      <div *ngIf="game.isUnplayed == 'true'">
+          <h2 class="gameInfoScore">0 - 0</h2>
+          <small>Pregame</small>
+      </div>
+      
+    </div>
+    <div>
+        <img src="assets/imgs/{{game.game.homeTeam.Abbreviation}}.png">
+        <span>Home</span>
+    </div>
+  </div>
+</div>
