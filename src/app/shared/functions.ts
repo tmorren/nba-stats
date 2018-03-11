@@ -74,5 +74,9 @@ export class Functions {
 
         return date;
     }
+
+    static sleep (time) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+      }
     
 }

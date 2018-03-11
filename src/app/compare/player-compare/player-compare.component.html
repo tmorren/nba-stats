@@ -1,3 +1,24 @@
-<p>
-  player-compare works!
-</p>
+<div class="card-row-2">
+  <div class="card card__white">
+
+  </div>
+  <div class="card card__white">
+
+  </div>
+</div>
+<div class="card-row-3">
+  <div class="card card__white">
+      <canvas [hidden]="!playerOneDoughnutLoaded" id="playerOneDoughnutChart" width="200" height="200">{{ playerOneDoughnutChart }}</canvas>
+      <mat-spinner *ngIf="!playerOneDoughnutLoaded"></mat-spinner>
+  </div>
+  <div class="card card__white">
+      <canvas [hidden]="!radarLoaded" id="radarChart" width="200" height="200">{{ radarChart }}</canvas>
+      <mat-spinner *ngIf="!radarLoaded"></mat-spinner>
+  </div>
+  <div class="card card__white">
+      <canvas [hidden]="!playerTwoDoughnutLoaded" id="playerTwoDoughnutChart" width="200" height="200">{{ playerTwoDoughnutChart }}</canvas>
+      <mat-spinner *ngIf="!playerTwoDoughnutLoaded"></mat-spinner>
+  </div>
+</div>
+
+
