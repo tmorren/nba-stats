@@ -53,6 +53,23 @@
     margin-bottom: 1rem;
 }
 
+@media (max-width: 750px) {
+    .card-row-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card-row-2 {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (max-width: 520px) {
+    .card-row-3 {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+
 // On small devices, each col-md takes up the full width
 .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12{
     grid-column: span 12;

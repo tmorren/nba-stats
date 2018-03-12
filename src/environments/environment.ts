@@ -11,5 +11,5 @@ export const environment = {
 
   newsApiKey: 'bede819a64b4415a881b4b9327cbe0f2',
   newsApiBaseUrl: 'https://newsapi.org/v2/top-headlines',
-  newsApiUrl: 'https://newsapi.org/v2/top-headlines?sources=bleacher-report,espn&q=nba&apiKey=bede819a64b4415a881b4b9327cbe0f2'  
+  newsApiUrl: 'https://newsapi.org/v2/top-headlines?sources=espn&q=nba&apiKey=bede819a64b4415a881b4b9327cbe0f2'  
 };
