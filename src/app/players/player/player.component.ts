@@ -214,8 +214,11 @@ export class PlayerComponent implements OnInit {
   getPlayerInfo(player){
     const sub = this.playersService.getPlayerInfo(player).subscribe( (data) => {
       let playerInfo = data.activeplayers.playerentry[0].player;
+      let teamInfo = data.activeplayers.playerentry[0].team;
+      this.player['team'] = {};
       
       this.player = Object.assign(this.player, playerInfo);
+      this.player['team'] = Object.assign(this.player['team'], teamInfo);
       this.getLeagueLeaderStatsByPosition();
     });
     

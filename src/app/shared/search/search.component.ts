@@ -52,4 +52,8 @@ export class SearchComponent implements OnInit {
     }
     
   }
+
+  ngOnDestroy() {
+    this.players = [];
+  }
 }

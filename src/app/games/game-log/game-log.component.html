@@ -12,6 +12,18 @@
         {{ gamelog.game.date }}
       </ng-template>
     </p-column>
+
+    <p-column header="vs.">
+      <ng-template let-gamelog="rowData" pTemplate="body">
+        <span *ngIf="gamelog.game.homeTeam.Abbreviation != gamelog.team.Abbreviation">
+          @ <a href="teams/{{ gamelog.game.homeTeam.Abbreviation }}">{{ gamelog.game.homeTeam.Abbreviation }}</a>
+        </span>
+        <span *ngIf="gamelog.game.awayTeam.Abbreviation != gamelog.team.Abbreviation">
+          vs. <a href="teams/{{ gamelog.game.awayTeam.Abbreviation }}">{{ gamelog.game.awayTeam.Abbreviation }}</a>
+        </span>
+      </ng-template>
+    </p-column>
+
     <p-column header="Points">
       <ng-template let-gamelog="rowData" pTemplate="body">
         {{ gamelog.stats.Pts['#text'] }}
@@ -43,20 +55,31 @@
       </ng-template>
     </p-column>
     <ng-template let-gamelog pTemplate="rowexpansion">
-      <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px;">
+      <div class="ui-grid ui-grid-responsive ui-fluid">
           <div class="row">
             <div class="col-md-4">
-                <h5>Misc</h5>
+              <span class="detailed-stats-header">Misc</span>
+              <div class="detailed-stats-block">
+                <span>{{ gamelog.stats.PlusMinus['#text'] }} Plus/Minus</span>
+                <span>{{ gamelog.stats.FoulPers['#text'] }} Personal Fouls</span>
+                <span>{{ gamelog.stats.FoulPersDrawn['#text'] }} Personal Fouls Drawn</span>
               </div>
-            <div class="col-md-4">
-              <h5>Offense</h5>
-              {{ gamelog.stats.FgPct['#text'] }} FG% ({{ gamelog.stats.FgMade['#text'] }}/{{ gamelog.stats.FgAtt['#text'] }})<br>
-              {{ gamelog.stats.Fg3PtPct['#text'] }} 3P% ({{ gamelog.stats.Fg3PtMade['#text'] }}/{{ gamelog.stats.Fg3PtAtt['#text'] }})<br>
-              {{ gamelog.stats.FtPct['#text'] }} 3P% ({{ gamelog.stats.FtMade['#text'] }}/{{ gamelog.stats.FtAtt['#text'] }})<br>
             </div>
             <div class="col-md-4">
-              <h5>Defense</h5>
-              {{ gamelog.stats.Tov['#text'] }}
+              <span class="detailed-stats-header">Shooting Splits</span>
+              <div class="detailed-stats-block">
+                <span>{{ gamelog.stats.FgPct['#text'] }} FG% ({{ gamelog.stats.FgMade['#text'] }}/{{ gamelog.stats.FgAtt['#text'] }})</span>
+                <span>{{ gamelog.stats.Fg3PtPct['#text'] }} 3P% ({{ gamelog.stats.Fg3PtMade['#text'] }}/{{ gamelog.stats.Fg3PtAtt['#text'] }})</span>
+                <span>{{ gamelog.stats.FtPct['#text'] }} FT% ({{ gamelog.stats.FtMade['#text'] }}/{{ gamelog.stats.FtAtt['#text'] }})</span>
+                
+              </div>
+            </div>
+            <div class="col-md-4">
+              <span class="detailed-stats-header">Rebounding</span>
+              <div class="detailed-stats-block">
+                <span>{{ gamelog.stats.DefReb['#text'] }} Defensive Rebounds</span>
+                <span>{{ gamelog.stats.OffReb['#text'] }} Offensive Rebounds</span>
+              </div>
             </div>
           </div>
       </div>

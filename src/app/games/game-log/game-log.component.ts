@@ -20,13 +20,12 @@ export class GameLogComponent implements OnInit {
 
   ngOnInit() {
     this.getPlayerGameLog(this.player);
-    console.log(this.player);
   }
 
 
   getPlayerGameLog(player, season = 'latest'){
     this.gamesService.getPlayerGameLog(player, season).subscribe( (data) => {
-      //console.log(data);
+      console.log(data);
       this.gameLogs = data.playergamelogs.gamelogs;
       this.gameLogs.reverse();
       this.mostRecentGame = this.gameLogs[0];
