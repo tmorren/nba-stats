@@ -26,7 +26,6 @@ export class PlayersService {
     const headers = new HttpHeaders();
 
     let params = new HttpParams();
-    console.log('HELLO');
     return this.http.get(requestUrl, {headers: headers, params: params}).map((res: any) => res);
   }
 
@@ -37,8 +36,6 @@ export class PlayersService {
     let params = new HttpParams();
 
     params = params.append('playerstats', stat);
-
-    console.log(limit);
 
     if (limit) {
       params = params.append('limit', limit);
