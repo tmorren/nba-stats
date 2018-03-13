@@ -21,6 +21,15 @@ export class PlayersService {
     return this.http.get(requestUrl, {headers: headers, params: params}).map((res: any) => res);
   }
 
+  getActivePlayersForSearch(season = "latest"){
+    let requestUrl = environment.baseUrl + `/${season}/active_players.json`;
+    const headers = new HttpHeaders();
+
+    let params = new HttpParams();
+    console.log('HELLO');
+    return this.http.get(requestUrl, {headers: headers, params: params}).map((res: any) => res);
+  }
+
   getLeagueLeaders(stat, season = "latest", limit?,  position?) {
     let requestUrl = environment.baseUrl + `/${season}/cumulative_player_stats.json`;
     const headers = new HttpHeaders();
@@ -28,6 +37,8 @@ export class PlayersService {
     let params = new HttpParams();
 
     params = params.append('playerstats', stat);
+
+    console.log(limit);
 
     if (limit) {
       params = params.append('limit', limit);
@@ -42,6 +53,27 @@ export class PlayersService {
     params = params.append('sort', `stats.${stat}.D`);
     
 
+    return this.http.get(requestUrl, {headers: headers, params: params}).map((res: any) => res);
+  }
+
+  getLeagueLeadersList(stat, season = "latest", limit?) {
+    let requestUrl = environment.baseUrl + `/${season}/cumulative_player_stats.json`;
+    const headers = new HttpHeaders();
+
+    let params = new HttpParams();
+
+    params = params.append('playerstats', stat);
+
+    console.log(limit);
+
+    if (limit) {
+      params = params.append('limit', limit);
+    } else {
+      params = params.append('limit', '10');
+    }
+
+    params = params.append('sort', `stats.${stat}.D`);
+    
     return this.http.get(requestUrl, {headers: headers, params: params}).map((res: any) => res);
   }
 

@@ -29,15 +29,18 @@ export class CompareComponent implements OnInit {
   }
 
   getActivePlayers() {
-    this.playersService.getActivePlayers().subscribe( 
+    const sub = this.playersService.getActivePlayers().subscribe( 
       (data) => {
+        this.players = [];
         this.players = data.activeplayers.playerentry;
       },
       (err) => {
         console.log(err);
         this.players = [];
       }
-    )
+    );
+
+    this.subscription.push(sub);
   };
 
   loadPlayer(player_number, player) {

@@ -1,0 +1,19 @@
+.league-leader-list{
+    padding-left: 1em;
+}
+
+.league-leader-list li{
+    padding-top: .5em;
+}
+
+.league-leader-list .player-name{
+    display: block;
+    float: left;
+    clear: both;
+}
+
+.league-leader-list .player-stat{
+    display: block;
+    float: right;
+    font-weight: 600;
+}

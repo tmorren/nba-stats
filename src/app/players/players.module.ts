@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 
 /** COMPONENTS */
+import { LeagueLeadersComponent } from './league-leaders/league-leaders.component';
 import { PlayersComponent } from './players.component';
 import { PlayerComponent } from './player/player.component';
 import { PlayerListComponent } from './player-list/player-list.component';
@@ -29,7 +30,8 @@ import { PlayersService } from './players.service';
   declarations: [
     PlayersComponent,
     PlayerComponent,
-    PlayerListComponent
+    PlayerListComponent,
+    LeagueLeadersComponent
   ],
   exports: [
     PlayersComponent
