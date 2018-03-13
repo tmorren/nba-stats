@@ -15,6 +15,7 @@ export class LeagueLeadersComponent implements OnInit {
   arrayOfKeys;
   leagueLeaders = [];
   leagueLeadersLoaded: boolean = false;
+  loadingFail: boolean = false;
 
   // Subscriptions
   subscription: Subscription[] = [];
@@ -71,7 +72,10 @@ export class LeagueLeadersComponent implements OnInit {
             this.leagueLeaders[stat['abbr']].stat = stat['stat'];
             this.leagueLeaders[stat['abbr']].title = stat['title'];
           },
-          (err) => console.log(err),
+          (err) => {
+            this.leagueLeadersLoaded = true;
+            this.loadingFail = true;
+          },
           () => {
             if (Object.keys(this.leagueLeaders).length >= stats.length) {
               this.arrayOfKeys = Object.keys(this.leagueLeaders);

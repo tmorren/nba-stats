@@ -35,6 +35,7 @@ export class PlayerCompareComponent implements OnInit {
   playerOneDoughnutLoaded: boolean = false;
   playerTwoDoughnutLoaded: boolean = false;
   radarLoaded: boolean = false;
+  radarFailed: boolean = false;
 
   @Input() set playerOneSelected(player){
     this.players = [];
@@ -251,7 +252,10 @@ export class PlayerCompareComponent implements OnInit {
       const sub = this.playersService.getLeagueLeaders(stat['abbr'], 'latest', 1).subscribe( (data) => {
         this.leagueTopStat[stat['abbr']] = data.cumulativeplayerstats.playerstatsentry[0].stats[stat.stat]['#text'];
       },
-      (err) => console.log(err),
+      (err) => {
+        this.radarFailed = true;
+        this.radarLoaded = true;
+      },
       () => {
         if (Object.keys(this.leagueTopStat).length >= stats.length) {
           this.createRadarChart();

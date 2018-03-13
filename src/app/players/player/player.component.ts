@@ -45,6 +45,7 @@ export class PlayerComponent implements OnInit {
   monthStatsLoaded: boolean = false;
   doughnutLoaded: boolean = false;
   radarLoaded: boolean = false;
+  radarFailed: boolean = false;
   statsLoaded: boolean = false;
 
   constructor(private route: ActivatedRoute,
@@ -56,9 +57,18 @@ export class PlayerComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.leagueTopStat = [];
   
     this.watchForIdChange = this.route.params.subscribe(
       (params) => {
+
+        for (const sub of this.subscription) {
+          sub.unsubscribe();
+        }
+
+        this.leagueTopStat = [];
+        this.radarFailed = false;
+        
         this.selectedPlayer = params['id'];
         if(this.stream) {
           this.stream.unsubscribe();
@@ -196,16 +206,26 @@ export class PlayerComponent implements OnInit {
 
     stats.forEach( stat => {
       const sub = this.playersService.getLeagueLeaders(stat['abbr'], 'latest', 1, this.player.Position).subscribe( (data) => {
-        this.leagueTopStat[stat['abbr']] = data.cumulativeplayerstats.playerstatsentry[0].stats[stat.stat]['#text'];
+        if(data.cumulativeplayerstats.playerstatsentry[0].stats[stat.stat]){
+          this.leagueTopStat[stat['abbr']] = data.cumulativeplayerstats.playerstatsentry[0].stats[stat.stat]['#text'];
+        } else {
+          this.radarFailed = true;
+        }
+        
       },
-      (err) => console.log(err),
+      (err) => {
+        console.log(err);
+        this.radarFailed = true;
+        this.radarLoaded = true;
+      },
       () => {
         if (Object.keys(this.leagueTopStat).length >= stats.length) {
           this.createRadarChart();
         }
         this.createDoughnutChart();
       }
-    );
+      
+      );
       this.subscription.push(sub);
     });
     
@@ -213,6 +233,10 @@ export class PlayerComponent implements OnInit {
 
   getPlayerInfo(player){
     const sub = this.playersService.getPlayerInfo(player).subscribe( (data) => {
+      if(!data.activeplayers.playerentry){
+        console.log('An error!');
+        return;
+      }
       let playerInfo = data.activeplayers.playerentry[0].player;
       let teamInfo = data.activeplayers.playerentry[0].team;
       this.player['team'] = {};
@@ -239,8 +263,10 @@ export class PlayerComponent implements OnInit {
   getPlayerGameLogPastMonth(player) {
     const sub = this.gamesService.getPlayerGameLogPastMonth(player).subscribe( (data) => {
       this.gameLogs = data.playergamelogs.gamelogs;
-      if (this.gameLogs.length < 0){
-        return [];
+
+      if (!this.gameLogs){
+        this.gameLogs = [];
+        this.monthStatsLoaded = true;
       }
       this.gameLogs.reverse();
 

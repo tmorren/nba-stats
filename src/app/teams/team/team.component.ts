@@ -43,6 +43,7 @@ export class TeamComponent implements OnInit {
   doughnutLoaded: boolean = false;
   radarLoaded: boolean = false;
   statsLoaded: boolean = false;
+  radarFailed: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -178,7 +179,11 @@ export class TeamComponent implements OnInit {
       const sub = this.teamsService.getLeagueLeaders(stat['abbr'], 'latest', 1).subscribe( (data) => {
         this.leagueTopStat[stat['abbr']] = data.overallteamstandings.teamstandingsentry[0].stats[stat.stat]['#text'];
       },
-      (err) => console.log(err),
+      (err) => {
+        this.radarFailed = true;
+        this.radarLoaded = true;
+        return;
+      },
       () => {
         if (Object.keys(this.leagueTopStat).length >= stats.length) {
           this.createRadarChart();

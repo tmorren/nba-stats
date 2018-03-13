@@ -11,3 +11,4 @@
   </div>
 </div>
 <mat-spinner *ngIf="!leagueLeadersLoaded"></mat-spinner>
+<p *ngIf="leagueLeadersLoaded && loadingFail" class="loading-error">An error occured, please refresh and try again!</p>

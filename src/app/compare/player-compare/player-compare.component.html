@@ -63,8 +63,9 @@
     <mat-spinner *ngIf="!playerOneDoughnutLoaded"></mat-spinner>
   </div>
   <div class="card card__white">
-    <canvas [hidden]="!radarLoaded" id="radarChart" width="200" height="200">{{ radarChart }}</canvas>
+    <canvas [hidden]="!radarLoaded && !radarFailed" id="radarChart" width="200" height="200">{{ radarChart }}</canvas>
     <mat-spinner *ngIf="!radarLoaded"></mat-spinner>
+    <p *ngIf="radarLoaded && radarFailed" class="loading-error">An error occured, please refresh and try again!</p>
   </div>
   <div class="card card__white">
     <canvas [hidden]="!playerTwoDoughnutLoaded" id="playerTwoDoughnutChart" width="200" height="200">{{ playerTwoDoughnutChart }}</canvas>
