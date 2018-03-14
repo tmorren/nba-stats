@@ -4,7 +4,7 @@
     <h3>{{ leagueLeaders[key]['title'] }}</h3>
     <ol class="league-leader-list">
       <li *ngFor="let player of leagueLeaders[key]">
-        <span class="player-name"><a [routerLink]="['/players', player.player.git bID]">{{ player.player.FirstName }} {{ player.player.LastName }}</a></span>
+        <span class="player-name"><a [routerLink]="['/players', player.player.ID]">{{ player.player.FirstName }} {{ player.player.LastName }}</a></span>
         <span class="player-stat">{{ player.stats[leagueLeaders[key]['stat']]['#text'] }}</span>
       </li>
     </ol>
