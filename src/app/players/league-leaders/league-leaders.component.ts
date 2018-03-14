@@ -75,15 +75,16 @@ export class LeagueLeadersComponent implements OnInit {
           (err) => {
             this.leagueLeadersLoaded = true;
             this.loadingFail = true;
+            for (const sub of this.subscription) {
+              sub.unsubscribe();
+            }
           },
           () => {
             if (Object.keys(this.leagueLeaders).length >= stats.length) {
               this.arrayOfKeys = Object.keys(this.leagueLeaders);
               this.leagueLeadersLoaded = true;
-
-              for (const sub of this.subscription) {
-                sub.unsubscribe();
-              }
+              console.log(this.leagueLeaders);
+              
             }
           })
           this.subscription.push(sub);

@@ -39,7 +39,6 @@ export class GameListDateComponent implements OnInit {
           }
         }
 
-        console.log(this.games);
       },
       (err) => {
         console.log(err);
