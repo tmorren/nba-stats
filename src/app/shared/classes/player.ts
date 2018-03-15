@@ -5,6 +5,7 @@ export class Player {
     FirstName: string;
     JerseyNumber: number;
     Position: string;
+    externalMapping;
 
     //Standings
     GamesPlayed: number;

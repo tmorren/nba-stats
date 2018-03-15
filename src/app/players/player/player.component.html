@@ -115,7 +115,7 @@
 
 </div>
 
-<div class="card-row-2">
+<div class="card-row-3">
     <div class="card">
         <canvas [hidden]="!radarLoaded && !radarFailed" id="radarChart" width="200" height="200">{{ radarChart }}</canvas>
         <mat-spinner *ngIf="!radarLoaded"></mat-spinner>
@@ -124,6 +124,10 @@
     <div class="card">
         <canvas [hidden]="!doughnutLoaded" id="doughnutChart" width="200" height="200">{{ doughnutChart }}</canvas>
         <mat-spinner *ngIf="!doughnutLoaded"></mat-spinner>
+    </div>
+    <div class="card">
+        <canvas [hidden]="!barChartLoaded" id="groupedBarChart" width="200" height="200">{{ groupedBarChart }}</canvas>
+        <mat-spinner *ngIf="!barChartLoaded"></mat-spinner>
     </div>
 </div>
 

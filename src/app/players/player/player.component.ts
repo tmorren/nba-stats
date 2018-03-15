@@ -33,6 +33,7 @@ export class PlayerComponent implements OnInit {
 
   // Charts
   doughnutChart: any;
+  groupedBarChart: any;
   radarChart: any;
   
   // Subscriptions
@@ -44,6 +45,7 @@ export class PlayerComponent implements OnInit {
   infoLoaded: boolean = false;
   monthStatsLoaded: boolean = false;
   doughnutLoaded: boolean = false;
+  barChartLoaded: boolean = false;
   radarLoaded: boolean = false;
   radarFailed: boolean = false;
   statsLoaded: boolean = false;
@@ -86,8 +88,13 @@ export class PlayerComponent implements OnInit {
           this.radarChart.destroy();
         }
 
+        if(this.groupedBarChart !== undefined){
+          this.groupedBarChart.destroy();
+        }
+
         this.infoLoaded = false;
         this.monthStatsLoaded= false;
+        this.barChartLoaded = false;
         this.doughnutLoaded= false;
         this.radarLoaded = false;
         this.statsLoaded = false;
@@ -160,7 +167,7 @@ export class PlayerComponent implements OnInit {
         labels: ['3Pt', '2PT', 'FT'],
         datasets: [
             {
-                backgroundColor: ['rgba(252,196,25, .5)', 'rgba(226,30,86, .5)', 'rgba(84,216,186, .5)'],
+                backgroundColor: ['rgba(255,105,180, .5)', 'rgba(63,70,173, .5)', 'rgba(101, 210, 242, .7)'],
                 data: [
                   this.player.Fg3PtMadePerGame['#text'] * 3, 
                   this.player.Fg2PtMadePerGame['#text'] * 2,
@@ -178,6 +185,45 @@ export class PlayerComponent implements OnInit {
       }
     });
     this.doughnutLoaded = true;
+  }
+
+  createGroupedBarChart() {
+    if(this.groupedBarChart !== undefined){
+      this.groupedBarChart.destroy();
+    }
+
+    this.groupedBarChart = new Chart('groupedBarChart', {
+
+      type: 'bar',
+      data: {
+        labels: ['FT', '2PT', '3PT'],
+        datasets: [{
+          label: "Made",
+          backgroundColor: "rgba(84,216,186, .5)",
+          data: [this.player.FtMadePerGame['#text'], this.player.Fg2PtMadePerGame['#text'], this.player.Fg3PtMadePerGame['#text']]
+        }, {
+          label: "Attempted",
+          backgroundColor: "rgba(181, 41, 62, .5)",
+          data: [this.player.FtAttPerGame['#text'], this.player.Fg2PtAttPerGame['#text'], this.player.Fg3PtAttPerGame['#text']]
+        }]
+      },
+      options: {
+        title: {
+          display: true,
+          text: this.player.FirstName + ' ' + this.player.LastName + ' Makes vs. Attempts'
+        },
+        scales: {
+          yAxes: [{
+              ticks: {
+                  beginAtZero: true
+              }
+          }]
+        },
+        animation: false
+      }
+    });
+
+    this.barChartLoaded = true;
   }
 
   getLeagueLeaderStatsByPosition() {
@@ -223,6 +269,7 @@ export class PlayerComponent implements OnInit {
           this.createRadarChart();
         }
         this.createDoughnutChart();
+        this.createGroupedBarChart();
       }
       
       );
