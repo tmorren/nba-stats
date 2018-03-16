@@ -1,0 +1,76 @@
+
+<p-dataTable 
+[(value)]="boxscore"
+[responsive]="true"
+[rows]="10" 
+[paginator]="true"
+expandableRows="true"
+#dt (onRowClick)="dt.toggleRow($event.data)"
+>
+<p-column header="Player">
+  <ng-template let-boxscore="rowData" pTemplate="body">
+    {{ boxscore.player.FirstName }} {{ boxscore.player.LastName }}
+  </ng-template>
+</p-column>
+
+<p-column header="Points">
+  <ng-template let-boxscore="rowData" pTemplate="body">
+    {{ boxscore.stats.Pts['#text'] }}
+  </ng-template>
+</p-column>
+<p-column header="Rebounds">
+  <ng-template let-boxscore="rowData" pTemplate="body">
+    {{ boxscore.stats.Reb['#text'] }}
+  </ng-template>
+</p-column>
+<p-column header="Assists">
+  <ng-template let-boxscore="rowData" pTemplate="body">
+    {{ boxscore.stats.Ast['#text'] }}
+  </ng-template>
+</p-column>
+<p-column header="Steals" >
+  <ng-template let-boxscore="rowData" pTemplate="body">
+    {{ boxscore.stats.Stl['#text'] }}
+  </ng-template>
+</p-column>
+<p-column header="Blocks">
+  <ng-template let-boxscore="rowData" pTemplate="body">
+    {{ boxscore.stats.Blk['#text'] }}
+  </ng-template>
+</p-column>
+<p-column header="Turnovers">
+  <ng-template let-boxscore="rowData" pTemplate="body">
+    {{ boxscore.stats.Tov['#text'] }}
+  </ng-template>
+</p-column>
+<ng-template let-boxscore pTemplate="rowexpansion">
+  <div class="ui-grid ui-grid-responsive ui-fluid">
+      <div class="row">
+        <div class="col-md-4">
+          <span class="detailed-stats-header">Misc</span>
+          <div class="detailed-stats-block">
+            <span>{{ boxscore.stats.PlusMinus['#text'] }} Plus/Minus</span>
+            <span>{{ boxscore.stats.FoulPers['#text'] }} Personal Fouls</span>
+            <span>{{ boxscore.stats.FoulPersDrawn['#text'] }} Personal Fouls Drawn</span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <span class="detailed-stats-header">Shooting Splits</span>
+          <div class="detailed-stats-block">
+            <span>{{ boxscore.stats.FgPct['#text'] }} FG% ({{ boxscore.stats.FgMade['#text'] }}/{{ boxscore.stats.FgAtt['#text'] }})</span>
+            <span>{{ boxscore.stats.Fg3PtPct['#text'] }} 3P% ({{ boxscore.stats.Fg3PtMade['#text'] }}/{{ boxscore.stats.Fg3PtAtt['#text'] }})</span>
+            <span>{{ boxscore.stats.FtPct['#text'] }} FT% ({{ boxscore.stats.FtMade['#text'] }}/{{ boxscore.stats.FtAtt['#text'] }})</span>
+            
+          </div>
+        </div>
+        <div class="col-md-4">
+          <span class="detailed-stats-header">Rebounding</span>
+          <div class="detailed-stats-block">
+            <span>{{ boxscore.stats.DefReb['#text'] }} Defensive Rebounds</span>
+            <span>{{ boxscore.stats.OffReb['#text'] }} Offensive Rebounds</span>
+          </div>
+        </div>
+      </div>
+  </div>
+</ng-template>
+</p-dataTable>

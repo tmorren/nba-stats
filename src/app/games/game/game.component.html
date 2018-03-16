@@ -34,3 +34,10 @@
       <div>Home</div>
   </div>
 </div>
+
+<div *ngIf="awayTeam">
+    <app-game-boxscore [(boxscore)]="awayTeam.awayPlayers.playerEntry"></app-game-boxscore>
+</div>
+<div *ngIf="homeTeam">
+    <app-game-boxscore [(boxscore)]="homeTeam.homePlayers.playerEntry"></app-game-boxscore>
+</div>

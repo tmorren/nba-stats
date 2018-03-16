@@ -8,6 +8,7 @@ import { GameComponent } from './game/game.component';
 import { GameLogComponent } from './game-log/game-log.component';
 import { DataTableModule,SharedModule } from 'primeng/primeng';
 import { GameListDateComponent } from './game-list-date/game-list-date.component';
+import { GameBoxscoreComponent } from './game-boxscore/game-boxscore.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,7 @@ import { GameListDateComponent } from './game-list-date/game-list-date.component
     GameListComponent, 
     GameComponent, 
     GameLogComponent, 
-    GameListDateComponent
+    GameListDateComponent, GameBoxscoreComponent
   ],
   exports: [
     GameComponent,

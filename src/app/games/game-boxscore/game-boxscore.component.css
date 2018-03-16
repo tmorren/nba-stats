@@ -1,0 +1,19 @@
+.detailed-stats-header{
+    font-weight: 600;
+    margin-bottom: .2em;
+    display: block;
+}
+
+
+.detailed-stats-block span{
+    display: block;
+    padding: .2em 0;
+}
+
+.ui-grid .ui-grid-responsive .ui-fluid{
+    padding: 0 2em;
+}
+
+.col-md-4{
+    padding-left: 2em;
+}
