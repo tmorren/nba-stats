@@ -30,6 +30,7 @@ export class TeamComponent implements OnInit {
 
   // Charts
   doughnutChart: any;
+  groupedBarChart: any;
   radarChart: any;
 
   // Subscriptions
@@ -40,6 +41,7 @@ export class TeamComponent implements OnInit {
   // Check if loaded
   infoLoaded: boolean = false;
   monthStatsLoaded: boolean = false;
+  barChartLoaded: boolean = false;
   doughnutLoaded: boolean = false;
   radarLoaded: boolean = false;
   statsLoaded: boolean = false;
@@ -86,7 +88,7 @@ export class TeamComponent implements OnInit {
         labels: ['3Pt', '2PT', 'FT'],
         datasets: [
             {
-                backgroundColor: ['rgba(252,196,25, .5)', 'rgba(226,30,86, .5)', 'rgba(84,216,186, .5)'],
+                backgroundColor: ['rgba(255,105,180, .5)', 'rgba(63,70,173, .5)', 'rgba(101, 210, 242, .7)'],
                 data: [
                   this.team.Fg3PtMadePerGame['#text'] * 3, 
                   this.team.Fg2PtMadePerGame['#text'] * 2,
@@ -104,6 +106,45 @@ export class TeamComponent implements OnInit {
       }
     });
     this.doughnutLoaded = true;
+  }
+
+  createGroupedBarChart() {
+    if(this.groupedBarChart !== undefined){
+      this.groupedBarChart.destroy();
+    }
+
+    this.groupedBarChart = new Chart('groupedBarChart', {
+
+      type: 'bar',
+      data: {
+        labels: ['FT', '2PT', '3PT'],
+        datasets: [{
+          label: "Made",
+          backgroundColor: "rgba(84,216,186, .5)",
+          data: [this.team.FtMadePerGame['#text'], this.team.Fg2PtMadePerGame['#text'], this.team.Fg3PtMadePerGame['#text']]
+        }, {
+          label: "Attempted",
+          backgroundColor: "rgba(181, 41, 62, .5)",
+          data: [this.team.FtAttPerGame['#text'], this.team.Fg2PtAttPerGame['#text'], this.team.Fg3PtAttPerGame['#text']]
+        }]
+      },
+      options: {
+        title: {
+          display: true,
+          text: this.team.City + ' ' + this.team.Name + ' Makes vs. Attempts'
+        },
+        scales: {
+          yAxes: [{
+              ticks: {
+                  beginAtZero: true
+              }
+          }]
+        },
+        animation: false
+      }
+    });
+
+    this.barChartLoaded = true;
   }
 
   createRadarChart() {
@@ -189,6 +230,7 @@ export class TeamComponent implements OnInit {
           this.createRadarChart();
         }
         this.createDoughnutChart();
+        this.createGroupedBarChart();
       }
     );
       this.subscription.push(sub);
