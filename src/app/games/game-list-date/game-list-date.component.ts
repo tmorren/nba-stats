@@ -38,7 +38,6 @@ export class GameListDateComponent implements OnInit {
             this.games[i].currentQuarterTimeRemaining = String(minutes) + ":" + String(seconds);
           }
         }
-
       },
       (err) => {
         console.log(err);

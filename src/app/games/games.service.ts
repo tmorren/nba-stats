@@ -12,6 +12,19 @@ export class GamesService {
 
   constructor(public http: HttpClient) { }
 
+  getGameBoxscore(gameID,  season="latest") {
+    let requestUrl = environment.baseUrl + `/${season}/game_boxscore.json`;
+    const headers = new HttpHeaders();
+
+    headers.set('Content-Type', 'application/json; charset=utf-8');
+
+    let params = new HttpParams();
+
+    params = params.append('gameid', gameID);
+
+    return this.http.get(requestUrl, {headers: headers, params: params}).map((res: any) => res);
+  }
+
   getGameList(date?, season="latest") {
     let requestUrl = environment.baseUrl + `/${season}/scoreboard.json`;
     const headers = new HttpHeaders();

@@ -2,7 +2,7 @@
   <span class="page-title">{{ title }}</span>
 </div>
 <div *ngIf="games && games.length > 0" class="card-row-3">
-  <div *ngFor="let game of games" class="card card__white gameCard">
+  <a [routerLink]="['/games', game.game.ID]" *ngFor="let game of games" class="card card__white gameCard">
     <div>
         <img src="assets/imgs/{{game.game.awayTeam.Abbreviation}}.png">
         <span>Away</span>
@@ -38,5 +38,5 @@
         <img src="assets/imgs/{{game.game.homeTeam.Abbreviation}}.png">
         <span>Home</span>
     </div>
-  </div>
+  </a>
 </div>
