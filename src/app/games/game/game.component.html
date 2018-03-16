@@ -1,3 +1,36 @@
-<p>
-  game works!
-</p>
+<div *ngIf="game" class="card card__white gameCard">
+  <div>
+      <img src="assets/imgs/{{game.awayTeam.Abbreviation}}.png">
+      <div>Away</div>
+  </div>
+  <div class="gameInfo">
+    <h5>{{ game.location }}</h5>
+    <small>{{ game.date }}</small>
+    <small>{{ game.time }}</small>
+
+    <h1 class="gameInfoScore">{{ awayTeam.awayTeamStats.Pts['#text'] }} - {{ homeTeam.homeTeamStats.Pts['#text'] }}</h1>
+
+    <ul class="quarterSummaryBox">
+      <ul class="quarterScores">
+        <li class="scoreHeader">Team</li>
+        <li>{{ game.awayTeam.Abbreviation }}</li>
+        <li>{{ game.homeTeam.Abbreviation }}</li>
+      </ul>
+      <ul *ngFor="let quarter of quarterSummary.quarter" class="quarterScores">
+        <li class="scoreHeader">{{ quarter['@number'] }}</li>
+        <li>{{ quarter.awayScore }}</li>
+        <li>{{ quarter.homeScore }}</li>
+      </ul>
+      <ul class="quarterScores">
+        <li class="scoreHeader">F</li>
+        <li>{{ awayTeam.awayTeamStats.Pts['#text'] }}</li>
+        <li>{{ homeTeam.homeTeamStats.Pts['#text'] }}</li>
+      </ul>
+    </ul>
+
+  </div>
+  <div>
+      <img src="assets/imgs/{{game.homeTeam.Abbreviation}}.png">
+      <div>Home</div>
+  </div>
+</div>

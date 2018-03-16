@@ -1,0 +1,44 @@
+.gameCard{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-gap: 20px;
+
+    text-align: center;
+}
+
+.quarterScores{
+    float: left;
+    list-style-type: none;
+    padding: 0;
+}
+
+.quarterScores li {
+    padding: .2em .5em;
+}
+
+.scoreHeader{
+    background: #343A40;
+    color: white;
+}
+
+.quarterSummaryBox{
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+    display: inline-block;
+    padding: 0;
+}
+
+.quarterSummaryBox:after{
+    content: " ";
+    display: block;
+    height: 0; 
+    clear: both;
+}
+
+.gameInfoScore{
+    font-size: 3em;
+    padding: .25em;
+}
+
+small{
+    display: block;
+}
