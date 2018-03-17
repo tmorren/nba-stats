@@ -12,6 +12,12 @@
     padding: 0;
 }
 
+@media (max-width: 700px) {
+    .quarterScores{
+        width: 100%;
+    }
+}
+
 .quarterScores li {
     padding: .2em .5em;
 }
@@ -41,4 +47,21 @@
 
 small{
     display: block;
+}
+
+.teamSelect{
+    padding: .5em;
+    font-size: 1.25em;
+    background: none;
+    border: 3px solid #4DADF7;
+}
+
+.buttonRow{
+    text-align: center;
+    padding-bottom: 1em;
+}
+
+.buttonSelected{
+    background: #4DADF7;
+    color: white;
 }

@@ -9,7 +9,7 @@ expandableRows="true"
 >
 <p-column header="Player">
   <ng-template let-boxscore="rowData" pTemplate="body">
-    {{ boxscore.player.FirstName }} {{ boxscore.player.LastName }}
+    <a class="bold-column" [routerLink]="['/players', boxscore.player.ID]">{{ boxscore.player.FirstName }} {{ boxscore.player.LastName }}</a>
   </ng-template>
 </p-column>
 

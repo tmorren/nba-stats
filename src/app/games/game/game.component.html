@@ -35,9 +35,125 @@
   </div>
 </div>
 
-<div *ngIf="awayTeam">
-    <app-game-boxscore [(boxscore)]="awayTeam.awayPlayers.playerEntry"></app-game-boxscore>
+<div class="card-row-2">
+    <div class="card card__dark_gray" *ngIf="awayTeam">
+      <h3>{{ game.awayTeam.City }} {{ game.awayTeam.Name }}</h3>
+      <div class="stats-season">
+        <div class="row">
+          <div class="col-md-4 stat__big">
+            {{ awayTeam.awayTeamStats.Pts['#text'] }} PTS
+          </div>
+          <div class="col-md-4 stat__big">
+            {{ awayTeam.awayTeamStats.Reb['#text'] }} REB
+          </div>
+          <div class="col-md-4 stat__big">
+            {{ awayTeam.awayTeamStats.Reb['#text'] }} AST
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            {{ awayTeam.awayTeamStats.Stl['#text'] }} STL
+          </div>
+          <div class="col-md-4">
+            {{ awayTeam.awayTeamStats.Blk['#text'] }} Blk
+          </div>
+          <div class="col-md-4">
+            {{ awayTeam.awayTeamStats.Tov['#text'] }} TO
+          </div>
+        </div>
+
+        <br>
+        <hr>
+        <br>
+
+        <div class="row">
+            <div class="col-md-4 stat__big">
+                {{ awayTeam.awayTeamStats.FgPct['#text'] }} FG%<br>
+                <span class="stat-card-shooting">{{ awayTeam.awayTeamStats.FgMadePerGame['#text'] }}-{{ awayTeam.awayTeamStats.FgAttPerGame['#text'] }}</span>
+            </div>
+            <div class="col-md-4 stat__big">
+                {{ awayTeam.awayTeamStats.Fg3PtPct['#text'] }} 3P%<br>
+                <span class="stat-card-shooting">{{ awayTeam.awayTeamStats.Fg3PtMadePerGame['#text'] }}-{{ awayTeam.awayTeamStats.Fg3PtAttPerGame['#text'] }}</span>
+            </div>
+            <div class="col-md-4 stat__big">
+                {{ awayTeam.awayTeamStats.FtPct['#text'] }} FT%<br>
+                <span class="stat-card-shooting">{{ awayTeam.awayTeamStats.FtMadePerGame['#text'] }}-{{ awayTeam.awayTeamStats.FtAttPerGame['#text'] }}</span>
+            </div>
+          </div>
+      </div>
+    </div>
+
+
+    <div class="card card__dark_gray" *ngIf="awayTeam">
+        <h3>{{ game.homeTeam.City }} {{ game.homeTeam.Name }}</h3>
+        <div class="stats-season">
+          <div class="row">
+            <div class="col-md-4 stat__big">
+              {{ homeTeam.homeTeamStats.Pts['#text'] }} PTS
+            </div>
+            <div class="col-md-4 stat__big">
+              {{ homeTeam.homeTeamStats.Reb['#text'] }} REB
+            </div>
+            <div class="col-md-4 stat__big">
+              {{ homeTeam.homeTeamStats.Reb['#text'] }} AST
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="col-md-4">
+              {{ homeTeam.homeTeamStats.Stl['#text'] }} STL
+            </div>
+            <div class="col-md-4">
+              {{ homeTeam.homeTeamStats.Blk['#text'] }} Blk
+            </div>
+            <div class="col-md-4">
+              {{ homeTeam.homeTeamStats.Tov['#text'] }} TO
+            </div>
+          </div>
+  
+          <br>
+          <hr>
+          <br>
+  
+          <div class="row">
+              <div class="col-md-4 stat__big">
+                  {{ homeTeam.homeTeamStats.FgPct['#text'] }} FG%<br>
+                  <span class="stat-card-shooting">{{ homeTeam.homeTeamStats.FgMadePerGame['#text'] }}-{{ homeTeam.homeTeamStats.FgAttPerGame['#text'] }}</span>
+              </div>
+              <div class="col-md-4 stat__big">
+                  {{ homeTeam.homeTeamStats.Fg3PtPct['#text'] }} 3P%<br>
+                  <span class="stat-card-shooting">{{ homeTeam.homeTeamStats.Fg3PtMadePerGame['#text'] }}-{{ homeTeam.homeTeamStats.Fg3PtAttPerGame['#text'] }}</span>
+              </div>
+              <div class="col-md-4 stat__big">
+                  {{ homeTeam.homeTeamStats.FtPct['#text'] }} FT%<br>
+                  <span class="stat-card-shooting">{{ homeTeam.homeTeamStats.FtMadePerGame['#text'] }}-{{ homeTeam.homeTeamStats.FtAttPerGame['#text'] }}</span>
+              </div>
+            </div>
+        </div>
+      </div>
 </div>
-<div *ngIf="homeTeam">
-    <app-game-boxscore [(boxscore)]="homeTeam.homePlayers.playerEntry"></app-game-boxscore>
+
+<div class="card-row-3">
+  <div class="card">
+      <canvas id="awayDoughnutChart" width="200" height="200">{{ awayDoughnutChart }}</canvas>
+  </div>
+  <div class="card">
+      <canvas id="groupedBarChart" width="200" height="200">{{ groupedBarChart }}</canvas>
+  </div>
+  <div class="card">
+      <canvas id="homeDoughnutChart" width="200" height="200">{{ homeDoughnutChart }}</canvas>
+  </div>
 </div>
+
+
+<!-- Box Score -->
+<div *ngIf="awayTeam && homeTeam">
+  <div class="buttonRow">
+    <button class="teamSelect" [class.buttonSelected]="showAwayTeam" (click)="toggleTeamBoxScore('away')">{{ game.awayTeam.Abbreviation }}</button>
+    <button class="teamSelect" [class.buttonSelected]="showHomeTeam" (click)="toggleTeamBoxScore('home')">{{ game.homeTeam.Abbreviation }}</button>
+  </div>
+  <app-game-boxscore [(boxscore)]="awayTeam.awayPlayers.playerEntry" [hidden]="!showAwayTeam"></app-game-boxscore>
+  <app-game-boxscore [(boxscore)]="homeTeam.homePlayers.playerEntry" [hidden]="!showHomeTeam"></app-game-boxscore>
+</div>
+
