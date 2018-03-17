@@ -1,6 +1,6 @@
 <div *ngIf="game" class="card card__white gameCard">
   <div>
-      <img src="assets/imgs/{{game.awayTeam.Abbreviation}}.png">
+      <a [routerLink]="['/teams', game.awayTeam.Abbreviation]"><img src="assets/imgs/{{game.awayTeam.Abbreviation}}.png"></a>
       <div>Away</div>
   </div>
   <div class="gameInfo">
@@ -30,7 +30,7 @@
 
   </div>
   <div>
-      <img src="assets/imgs/{{game.homeTeam.Abbreviation}}.png">
+      <a [routerLink]="['/teams', game.homeTeam.Abbreviation]"><img src="assets/imgs/{{game.homeTeam.Abbreviation}}.png"></a>
       <div>Home</div>
   </div>
 </div>

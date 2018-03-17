@@ -16,10 +16,10 @@
     <p-column header="vs.">
       <ng-template let-gamelog="rowData" pTemplate="body">
         <span *ngIf="gamelog.game.homeTeam.Abbreviation != gamelog.team.Abbreviation">
-          @ <a href="teams/{{ gamelog.game.homeTeam.Abbreviation }}">{{ gamelog.game.homeTeam.Abbreviation }}</a>
+          <a href="games/{{ gamelog.game.id }}">@ {{ gamelog.game.homeTeam.Abbreviation }}</a>
         </span>
         <span *ngIf="gamelog.game.awayTeam.Abbreviation != gamelog.team.Abbreviation">
-          vs. <a href="teams/{{ gamelog.game.awayTeam.Abbreviation }}">{{ gamelog.game.awayTeam.Abbreviation }}</a>
+          <a href="games/{{ gamelog.game.id }}">vs. {{ gamelog.game.awayTeam.Abbreviation }}</a>
         </span>
       </ng-template>
     </p-column>
