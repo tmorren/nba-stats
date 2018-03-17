@@ -22,6 +22,7 @@ export class GameComponent implements OnInit {
   homeTeam;
   showAwayTeam: boolean = true;
   showHomeTeam: boolean = false;
+  noGameData: boolean = false;
 
   // Charts
   awayDoughnutChart: any;
@@ -160,19 +161,12 @@ export class GameComponent implements OnInit {
   getGameBoxscore(){
     const sub = this.gamesService.getGameBoxscore(this.selectedGame).subscribe( 
       (data) => {
-        console.log(data);
         this.game = data.gameboxscore.game
         this.quarterSummary = data.gameboxscore.quarterSummary;
         this.awayTeam = data.gameboxscore.awayTeam;
         this.homeTeam = data.gameboxscore.homeTeam;
-
-        
-        console.log('Game', this.game);
-        console.log('Quarter sum', this.quarterSummary);
-        console.log('awayTeam', this.awayTeam);
-        console.log('homeTeam', this.homeTeam);
       },
-      (err) => console.log(err),
+      (err) => this.router.navigate(['/games']),
       () => {
         this.createDoughnutCharts();
         this.createGroupedBarChart();
